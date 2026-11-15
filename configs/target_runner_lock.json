@@ -1,0 +1,27 @@
+{
+  "candidate": "nearest_smooth50_reference",
+  "inputs": {
+    "configs/experiment_protocol.json": "286ba98376327417631dea234231045f5a456e9deb25bc0ee1c0c89eac96ba78",
+    "evaluation/possession_metrics.py": "341bad48904b489d6e875397b27687f5d6a4d22a397f3dc8af3a00d48f16874d",
+    "games.py": "3b2122794e9e0476e2b3a871d14880e5fa47c4feaeacf99caef054c2309076ce",
+    "malwarous/__init__.py": "01157217006e8c1b2639234e116703386683b21f2f2af90a90e22d5c11d18f48",
+    "malwarous/features.py": "56dd45bc38e5e8ba701c6022bdb4d6ed6c1e2ad2ad731e24125116e9dcf70a98",
+    "malwarous/inference.py": "decd8d632e0c785202b21006e9fc48c3ca126f057681b2f903b5f2cef1a5a26a",
+    "malwarous/metrica_ingest.py": "c4bf851cdd94bdfa7b3d0e1beccdfd7eb79578387f290f5b1c02d1958e2413cc",
+    "malwarous/models.py": "bd59c8093464b15ec5ae31c683b8187bd8e674274a91328f00f8b5c34d19a707",
+    "malwarous/private_worker.py": "e9862ec4035c9a3051b221d25d39b629437788f02be4724ea7b02ee2ad57827b",
+    "malwarous/safe_runner.py": "c5e87a0d4ee680114cfe2a4ec56d56b9825fa7533125fbb12d8dce3ad87dc169",
+    "malwarous/temporal.py": "9c53ab0bf031909fb7466289ac315bc63a7c4d8c10fa5b5adff543c5ec8e840d",
+    "requirements-starter.txt": "3ab2f63a40d11c75bc5fdcbea53f1e06bdf3a899d91a24839a595931d62efb86",
+    "requirements.in": "4d825fd5e54dec400a9172eae6519651e99894978a33290d288a6959fc81de71",
+    "requirements.lock": "65523f96a879ac5e2d8868f8bd1d04e3f726333cd5805550b4b41f9075014028",
+    "starter/baseline.py": "84d8a414fb1bdf8c7e1fbe4a8789fe6f9cc0c2cccec4685201285b75dbc0cfe6"
+  },
+  "mode": "reference",
+  "reference_window": 50,
+  "schema": 1,
+  "selection_code_fingerprint": "71600506d32a7aa96b0c5056345433f4cf28a80c8c73ce70df50437d6aa7627f",
+  "selection_commit": "4fafcab63ad1bee328cea10469cdff1abbb51070",
+  "selection_lock_id": "malwarous-phase1-v1",
+  "selection_protocol_sha256": "7d04b40943e62d6870a1280bb06daf3e4215bba26fe3c5af75a5349e15ebe7d4"
+}

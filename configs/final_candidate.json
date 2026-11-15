@@ -1,0 +1,23 @@
+{
+  "campaign_started_at_utc": "2026-11-13T14:50:47+00:00",
+  "candidate": "nearest_smooth50_reference",
+  "candidate_definition": null,
+  "code_commit": "4fafcab63ad1bee328cea10469cdff1abbb51070",
+  "code_fingerprint": "71600506d32a7aa96b0c5056345433f4cf28a80c8c73ce70df50437d6aa7627f",
+  "lock_id": "malwarous-phase1-v1",
+  "locked_at_utc": "2026-11-13T15:09:23+00:00",
+  "mode": "reference",
+  "protocol_sha256": "7d04b40943e62d6870a1280bb06daf3e4215bba26fe3c5af75a5349e15ebe7d4",
+  "reference_window": 50,
+  "sealed_audit_match": "J03WMX",
+  "sealed_audit_policy": "one run after config lock; audit result changes confidence only, never candidate or settings",
+  "target_runner_lock_sha256": "a4f30e02627f903f6207727d90816a1ba8da4bc0243f69d8300e0d6b8ee7e49f",
+  "training_matches": [
+    "J03WN1",
+    "J03WPY",
+    "J03WOH",
+    "J03WQQ",
+    "J03WOY",
+    "J03WR9"
+  ]
+}

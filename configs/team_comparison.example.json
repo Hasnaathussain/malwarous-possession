@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "data_role": "external_other_matches",
+  "source": {
+    "name": "REPLACE: external dataset name",
+    "url_or_catalog_id": "REPLACE: dataset URL or catalog identifier",
+    "license": "REPLACE: license",
+    "label_provenance": "REPLACE: who/what produced the labels and how"
+  },
+  "externality_attestation": "REPLACE: human statement confirming these are other matches and documenting the source audit",
+  "selection_protocol": {
+    "candidate_list_frozen_before_scoring": true,
+    "whole_match_heldout_predictions": true,
+    "target_match_data_used": false,
+    "target_human_labels_used": false,
+    "public_5min_used_for_selection": false,
+    "primary_metric": "equal_match_scenario_spell_f1",
+    "secondary_metric": "equal_match_scenario_macro_f1",
+    "tie_break": "If paired intervals overlap, vote on simplicity and reproducibility before anyone inspects target labels."
+  },
+  "blocks": [
+    {
+      "match_id": "external-match-one",
+      "scenario": "standard",
+      "evaluation_use": "reused_development",
+      "previous_research": "REPLACE: disclose that this match appears in another fold's training set and any earlier research use",
+      "truth_csv": "data/external/match-one-truth.csv",
+      "truth_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS",
+      "halves": [
+        {"half_id": "1", "start_row": 0, "stop_row": 120},
+        {"half_id": "2", "start_row": 120, "stop_row": 240}
+      ]
+    },
+    {
+      "match_id": "external-match-two",
+      "scenario": "standard",
+      "evaluation_use": "reused_development",
+      "previous_research": "REPLACE: disclose that this match appears in another fold's training set and any earlier research use",
+      "truth_csv": "data/external/match-two-truth.csv",
+      "truth_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS",
+      "halves": [
+        {"half_id": "1", "start_row": 0, "stop_row": 120},
+        {"half_id": "2", "start_row": 120, "stop_row": 240}
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "teammate-one",
+      "description": "REPLACE: frozen algorithm summary",
+      "training_match_ids": ["external-match-one", "external-match-two"],
+      "tuning_match_ids": [],
+      "artifact_path": "artifacts/teammate-one.zip",
+      "artifact_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS",
+      "cost": {
+        "fit_seconds": null,
+        "inference_seconds": null,
+        "peak_memory_mb": null,
+        "hardware": "REPLACE: hardware and software environment",
+        "run_scope": "REPLACE: e.g. total fit and inference time across these folds"
+      },
+      "predictions": [
+        {"match_id": "external-match-one", "scenario": "standard", "training_match_ids": ["external-match-two"], "tuning_match_ids": [], "fit_exclusion_confirmed": true, "fold_id": "holdout-match-one", "fold_model_path": "artifacts/folds/teammate-one-match-one.bin", "model_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS", "csv": "predictions/teammate-one/match-one.csv", "sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS"},
+        {"match_id": "external-match-two", "scenario": "standard", "training_match_ids": ["external-match-one"], "tuning_match_ids": [], "fit_exclusion_confirmed": true, "fold_id": "holdout-match-two", "fold_model_path": "artifacts/folds/teammate-one-match-two.bin", "model_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS", "csv": "predictions/teammate-one/match-two.csv", "sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS"}
+      ]
+    },
+    {
+      "candidate_id": "teammate-two",
+      "description": "REPLACE: frozen algorithm summary",
+      "training_match_ids": ["external-match-one", "external-match-two"],
+      "tuning_match_ids": [],
+      "artifact_path": "artifacts/teammate-two.zip",
+      "artifact_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS",
+      "cost": {
+        "fit_seconds": null,
+        "inference_seconds": null,
+        "peak_memory_mb": null,
+        "hardware": "REPLACE: hardware and software environment",
+        "run_scope": "REPLACE: e.g. total fit and inference time across these folds"
+      },
+      "predictions": [
+        {"match_id": "external-match-one", "scenario": "standard", "training_match_ids": ["external-match-two"], "tuning_match_ids": [], "fit_exclusion_confirmed": true, "fold_id": "holdout-match-one", "fold_model_path": "artifacts/folds/teammate-two-match-one.bin", "model_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS", "csv": "predictions/teammate-two/match-one.csv", "sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS"},
+        {"match_id": "external-match-two", "scenario": "standard", "training_match_ids": ["external-match-one"], "tuning_match_ids": [], "fit_exclusion_confirmed": true, "fold_id": "holdout-match-two", "fold_model_path": "artifacts/folds/teammate-two-match-two.bin", "model_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS", "csv": "predictions/teammate-two/match-two.csv", "sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS"}
+      ]
+    },
+    {
+      "candidate_id": "teammate-three",
+      "description": "REPLACE: frozen algorithm summary",
+      "training_match_ids": ["external-match-one", "external-match-two"],
+      "tuning_match_ids": [],
+      "artifact_path": "artifacts/teammate-three.zip",
+      "artifact_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS",
+      "cost": {
+        "fit_seconds": null,
+        "inference_seconds": null,
+        "peak_memory_mb": null,
+        "hardware": "REPLACE: hardware and software environment",
+        "run_scope": "REPLACE: e.g. total fit and inference time across these folds"
+      },
+      "predictions": [
+        {"match_id": "external-match-one", "scenario": "standard", "training_match_ids": ["external-match-two"], "tuning_match_ids": [], "fit_exclusion_confirmed": true, "fold_id": "holdout-match-one", "fold_model_path": "artifacts/folds/teammate-three-match-one.bin", "model_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS", "csv": "predictions/teammate-three/match-one.csv", "sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS"},
+        {"match_id": "external-match-two", "scenario": "standard", "training_match_ids": ["external-match-one"], "tuning_match_ids": [], "fit_exclusion_confirmed": true, "fold_id": "holdout-match-two", "fold_model_path": "artifacts/folds/teammate-three-match-two.bin", "model_sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS", "csv": "predictions/teammate-three/match-two.csv", "sha256": "REPLACE_WITH_64_LOWERCASE_HEX_CHARACTERS"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# Supported local runtime: CPython 3.11 x64 on Windows/Linux.
+numpy==2.4.4
+pandas==3.1.1
+scipy==1.17.1
+scikit-learn==1.9.1
+kloppy==3.18.0

@@ -1,0 +1,123 @@
+{
+  "protocol_id": "malwarous-phase1-v1",
+  "locked_before_model_experiments": true,
+  "random_seed": 20271113,
+  "frame_rate_hz": 25,
+  "selection_metric": "official_spell_f1_mean",
+  "selection_units": "mean across match and corruption condition",
+  "development_matches": [
+    "J03WN1",
+    "J03WPY",
+    "J03WOH",
+    "J03WQQ",
+    "J03WOY",
+    "J03WR9"
+  ],
+  "training_matches_for_selection": [
+    "J03WPY",
+    "J03WOH",
+    "J03WQQ",
+    "J03WR9"
+  ],
+  "selection_matches": [
+    "J03WN1",
+    "J03WOY"
+  ],
+  "final_training_matches_after_selection": "all development_matches",
+  "sealed_audit_match": "J03WMX",
+  "sealed_audit_policy": "one run after config lock; audit result changes confidence only, never candidate or settings",
+  "data_policy": {
+    "features_exclude": [
+      "BallStatus",
+      "BallPossession",
+      "events",
+      "outcomes",
+      "absolute player identity",
+      "club id",
+      "absolute match time"
+    ],
+    "unknown_active_owner": "exclude from owner loss and use X in metrics",
+    "dead_without_owner": "valid D target from BallStatus"
+  },
+  "corruption": {
+    "mask_unit": "ball x/y observations",
+    "mask_independence": "generated from match id and seed only; never conditioned on labels or events",
+    "block_length_distribution": "geometric, mean 8 frames",
+    "conditions": [
+      {"name": "clean", "masked_fraction": 0.0},
+      {"name": "moderate", "masked_fraction": 0.4},
+      {"name": "severe", "masked_fraction": 0.6}
+    ],
+    "train_augmentation": "one clean and one moderate view per training match"
+  },
+  "fixed_estimator": {
+    "family": "two HistGradientBoostingClassifier heads",
+    "alive_head": "active vs inactive/dead",
+    "owner_head": "home vs away conditional on active and known owner",
+    "max_iter": 100,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 50,
+    "max_bins": 63,
+    "l2_regularization": 2.0,
+    "class_weight": "balanced",
+    "early_stopping": false,
+    "team_swap_augmentation": true,
+    "random_state": 20271113
+  },
+  "feature_sets": {
+    "all_v1": "all 21 names in malwarous.features.FEATURE_NAMES",
+    "ball_control_geometry": [
+      "ball_observed",
+      "ball_tracker_speed_mps",
+      "ball_tracker_speed_valid",
+      "ball_motion_speed_mps",
+      "ball_motion_valid",
+      "ball_age_seconds",
+      "home_nearest_distance_m",
+      "away_nearest_distance_m",
+      "home_minus_away_distance_m",
+      "home_players_within_1m",
+      "away_players_within_1m",
+      "home_players_within_2m",
+      "away_players_within_2m",
+      "home_players_within_5m",
+      "away_players_within_5m"
+    ]
+  },
+  "candidate_limit": 4,
+  "decoder_candidates": [
+    {
+      "name": "geometry_mild",
+      "feature_set": "ball_control_geometry",
+      "turnover_penalty": 0.4,
+      "live_dead_penalty": 0.4,
+      "dead_restart_penalty": 0.2
+    },
+    {
+      "name": "full_mild",
+      "feature_set": "all_v1",
+      "turnover_penalty": 0.4,
+      "live_dead_penalty": 0.4,
+      "dead_restart_penalty": 0.2
+    },
+    {
+      "name": "full_control_persistence",
+      "feature_set": "all_v1",
+      "turnover_penalty": 1.0,
+      "live_dead_penalty": 0.4,
+      "dead_restart_penalty": 0.2
+    },
+    {
+      "name": "full_stoppage_sensitive",
+      "feature_set": "all_v1",
+      "turnover_penalty": 0.4,
+      "live_dead_penalty": 0.8,
+      "dead_restart_penalty": 0.2
+    }
+  ],
+  "selection_rule": "highest mean official spellF1 across two selection matches and three corruption conditions; ties within 0.02 prefer fewer features, then milder transition penalties; macroF1 is reported but cannot override a spellF1 difference greater than 0.02",
+  "fallback_rule": "use the nearest-player smooth50 reference unless the selected learned candidate improves mean spellF1 by at least 0.02 over that reference across the same six selection evaluations",
+  "experiment_cap_hours": 12,
+  "latest_experiment_finish_pk_time": "2026-11-16 08:00",
+  "no_target_label_use": true
+}

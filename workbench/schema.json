@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:malwarous:local-workbench:1.0",
+  "title": "Local possession workbench bundle 1.0",
+  "type": "object",
+  "required": ["schema_version", "dataset", "matches"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "dataset": {
+      "type": "object", "required": ["id", "title", "kind", "split", "provenance"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1}, "title": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["synthetic_demo", "public_external", "private_local"]},
+        "split": {"type": "string", "minLength": 1},
+        "provenance": {"oneOf": [{"type": "string", "minLength": 1}, {"type": "object", "minProperties": 1}]}
+      }
+    },
+    "matches": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/match"}}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+$"},
+    "spell": {
+      "type": "object", "required": ["start_s", "end_s", "state"],
+      "properties": {"start_s": {"type": "number", "minimum": 0}, "end_s": {"type": "number", "exclusiveMinimum": 0}, "state": {"enum": ["H", "A", "D", "X"]}},
+      "$comment": "Runtime validation additionally enforces positive length, ordering, nonoverlap and duration bounds."
+    },
+    "spells": {"type": "array", "items": {"$ref": "#/$defs/spell"}},
+    "score": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "benchmark": {
+      "type": "object", "required": ["version", "metric_source", "provenance"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1}, "metric_source": {"enum": ["official", "proxy", "synthetic_demo"]},
+        "spellF1": {"$ref": "#/$defs/score"}, "macroF1": {"$ref": "#/$defs/score"},
+        "runtime_s": {"type": ["number", "null"], "minimum": 0},
+        "provenance": {"type": "object", "required": ["model_version", "split", "evaluator"], "properties": {
+          "model_version": {"type": "string", "minLength": 1}, "split": {"type": "string", "minLength": 1}, "evaluator": {"type": "string", "minLength": 1}
+        }}
+      }
+    },
+    "sample": {
+      "type": "object", "required": ["t"],
+      "properties": {
+        "t": {"type": "number", "minimum": 0},
+        "ball": {"oneOf": [{"type": "null"}, {"type": "array", "minItems": 2, "maxItems": 3, "items": {"type": "number"}}]},
+        "players": {"type": "array", "items": {"type": "object", "required": ["team", "x", "y"], "properties": {
+          "id": {"type": ["string", "number"]}, "team": {"enum": ["H", "A"]}, "x": {"type": "number"}, "y": {"type": "number"}
+        }}},
+        "quality": {"type": "object", "properties": {"player_coverage": {"type": "number", "minimum": 0, "maximum": 1}, "ball_observed": {"type": "boolean"}}},
+        "evidence": {"type": "object", "additionalProperties": {"type": ["number", "null"]}}
+      }
+    },
+    "match": {
+      "type": "object", "required": ["id", "title", "duration_s", "pitch"],
+      "properties": {
+        "id": {"$ref": "#/$defs/identifier"}, "title": {"type": "string", "minLength": 1}, "duration_s": {"type": "number", "exclusiveMinimum": 0},
+        "pitch": {"type": "object", "required": ["length_m", "width_m"], "properties": {"length_m": {"type": "number", "exclusiveMinimum": 0}, "width_m": {"type": "number", "exclusiveMinimum": 0}}},
+        "media": {"type": "object", "required": ["id"], "properties": {"id": {"$ref": "#/$defs/identifier"}, "offset_s": {"type": "number"}, "fps": {"type": "number", "exclusiveMinimum": 0}}},
+        "samples": {"type": "array", "items": {"$ref": "#/$defs/sample"}},
+        "truth": {"$ref": "#/$defs/spells"},
+        "evidence_series": {"type": "array", "items": {"type": "object", "required": ["key", "label", "unit", "description"], "properties": {
+          "key": {"type": "string", "minLength": 1}, "label": {"type": "string", "minLength": 1}, "unit": {"type": "string"}, "description": {"type": "string", "minLength": 1}
+        }}},
+        "predictions": {"type": "object", "additionalProperties": {"type": "object", "required": ["spells", "provenance"], "properties": {"spells": {"$ref": "#/$defs/spells"}, "provenance": {"type": "object"}}}},
+        "benchmarks": {"type": "array", "items": {"$ref": "#/$defs/benchmark"}}
+      }
+    }
+  }
+}
