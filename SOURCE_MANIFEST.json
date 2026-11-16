@@ -147,6 +147,12 @@
       "sha256": "c972bba6199b1f75758b05cd64568c4837e9d0ce795d4ed2f67a3d0d06f13177"
     },
     {
+      "bytes": 8022,
+      "classification": "source_or_external_report",
+      "path": "docs/experiments/V6_PROTOCOL.md",
+      "sha256": "8c15af3fb2c633afd3efa4db7f2bdbdf7c0086ed8b18203b8fb9c038f99b0fce"
+    },
+    {
       "bytes": 76461,
       "classification": "source_or_external_report",
       "path": "docs/experiments/final-external-results.json",
