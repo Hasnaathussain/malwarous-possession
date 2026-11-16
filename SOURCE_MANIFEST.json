@@ -81,6 +81,12 @@
       "sha256": "b4170a2e0912e306d8dba0a8b5976bfae6ebd3617cd386ab6da3e9af895a6f2d"
     },
     {
+      "bytes": 2575,
+      "classification": "source_or_external_report",
+      "path": "docs/FINAL_CHECK_PROTOCOL.md",
+      "sha256": "fb57dee4992fb1848e83693e17a33a3d3e1ed828fe55be0ed602c5cff928e776"
+    },
+    {
       "bytes": 4451,
       "classification": "source_or_external_report",
       "path": "docs/FINAL_SUMMARY.md",
