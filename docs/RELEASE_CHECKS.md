@@ -3,7 +3,9 @@
 Reviewed 16 November 2026. The selected algorithm, fitted weights, official scorer
 and frozen source/report/configuration checks are unchanged from the verified V2
 release. This repository contains code, pinned dependencies, external benchmark
-evidence, the local interface and one attributed external-only fitted artifact.
+evidence, the local interface, the public Possession Atlas and one attributed
+external-only fitted artifact. Atlas includes only licensed external replay
+derivatives and a checksum-pinned synthetic video; see `website/PUBLIC_DATA.md`.
 Competition assets, target CSVs, private viewer data, credentials, logs, environments,
 old releases, meeting media and internal planning are excluded.
 
@@ -28,6 +30,22 @@ old releases, meeting media and internal planning are excluded.
 These checks have bounded scope. They do not establish target accuracy or certify
 the absence of every possible vulnerability. Tool reports and private execution
 logs remain outside this repository.
+
+## Public website checks
+
+The website addition passed 205 Python tests and 34 subtests. These include
+private-input rejection, allowed source IDs, full-rate interval preservation,
+missing observations, byte-range video seeking and the local public-root boundary.
+Five Node tests checked the illustrative Viterbi decoder, including exhaustive
+enumeration of small path objectives and invalid-input handling.
+
+Headless browser checks covered public replay loading, frame/time seeking and
+stepping, transition jumps, playback, video seek/play synchronization, benchmark
+filters, reference timelines, colors/display controls, share links, PNG export,
+the decoder lab and layouts at 320/390/768/1366 pixels. No browser exceptions or
+unexpected cross-origin application requests were observed. The site has no
+dependency installation or inference service. The frozen algorithm and scores
+are unchanged; website controls operate on display fixtures only.
 
 ## Static-analysis findings and their disposition
 

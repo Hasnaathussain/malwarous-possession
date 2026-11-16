@@ -1,6 +1,7 @@
 # Malwarous
 
-Possession inference from incomplete football tracking, with a local analysis workbench.
+Possession inference from incomplete football tracking, with a local analysis workbench
+and **Possession Atlas**, an interactive public replay and model guide.
 
 The frozen candidate is **context_p10_r0**: two contextual tree classifiers and
 half-wise persistent decoding. It uses 65 observable features, team symmetry and
@@ -16,6 +17,13 @@ observation scenarios. These are selection-conditioned development measurements,
 not blind-test results or competition scores. See [results](docs/FINAL_SUMMARY.md).
 
 ## Start
+
+For the public website, no dependencies are required: run
+`python -B scripts/serve_public_site.py --port 8788` and open
+http://127.0.0.1:8788. Explore six licensed matches, possession timelines, observation
+support, development results and a synthetic decoder lab. This replays saved
+outputs from the offline model. [Website guide](website/README.md) and
+[public data provenance](website/PUBLIC_DATA.md).
 
 Use 64-bit Python 3.11.9 and the pinned dependencies. From the repository root:
 

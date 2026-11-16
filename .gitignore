@@ -41,3 +41,7 @@ node_modules/
 .ssh/
 .coverage
 htmlcov/
+.vercel/
+
+# Exactly one generated, public-safe demonstration video is permitted.
+!website/media/synthetic-demo.mp4

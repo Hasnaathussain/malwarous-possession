@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f0eee4" />
+    <meta
+      name="description"
+      content="Possession Atlas makes an offline football possession model inspectable through public tracking replays, method notes, and development evidence."
+    />
+    <title>Possession Atlas — Malwarous</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Malwarous Possession Atlas home">
+        <svg class="wordmark-mark" viewBox="0 0 42 42" aria-hidden="true">
+          <rect x="1" y="1" width="40" height="40" rx="2" />
+          <path d="M11 7v28M31 7v28M7 13h28M7 29h28M21 7v28M7 21h28" />
+          <circle cx="21" cy="21" r="5" />
+        </svg>
+        <span class="wordmark-type">
+          <strong>MALWAROUS</strong>
+          <small>POSSESSION ATLAS</small>
+        </span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#replay">Replay</a>
+        <a href="#method">Method</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#decoder-lab">Decoder lab</a>
+        <a class="nav-github" href="https://github.com/Hasnaathussain/malwarous-possession" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open navigation">
+        <span></span><span></span>
+      </button>
+    </header>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="#replay">Replay</a>
+      <a href="#method">Method</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#decoder-lab">Decoder lab</a>
+      <a href="https://github.com/Hasnaathussain/malwarous-possession" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+
+    <main id="main">
+      <section class="hero section-wrap" id="top" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> FOOTBALL · SEQUENCE UNDERSTANDING</p>
+          <h1 id="heroTitle">The game between<br class="desktop-break" /> the <em>touches.</em></h1>
+          <p class="hero-deck">Possession Atlas opens an offline football sequence model for inspection: follow observed positions, compare possession timelines, and examine the development evidence.</p>
+          <a class="text-link" href="#replay">Enter the replay <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-note" aria-label="Project scope">
+          <div class="note-rule"></div>
+          <p class="note-index">SCOPE / 01</p>
+          <p>Public, licensed tracking replays.<br />No live feed. No uploads.</p>
+          <span class="note-stamp">MODEL VIEW<br /><b>OFFLINE</b></span>
+        </div>
+        <div class="hero-footer">
+          <div><strong>65</strong><span>observable features</span></div>
+          <div><strong>0.4 / 2 / 4s</strong><span>centered context windows</span></div>
+          <div><strong>06</strong><span>previously consumed development matches</span></div>
+          <p class="hero-footnote">All development measurements are selection-conditioned and reused-source.</p>
+        </div>
+      </section>
+
+      <section class="replay-section section-wrap" id="replay" aria-labelledby="replayTitle">
+        <div class="section-heading replay-heading">
+          <div>
+            <p class="eyebrow">01 — THE FIELD</p>
+            <h2 id="replayTitle">Replay the evidence.</h2>
+          </div>
+          <p class="section-intro">The field below is reconstructed from approved public tracking observations. Positions are sampled for display; labels and benchmark values retain their published frame intervals.</p>
+        </div>
+
+        <div class="dataset-toolbar" aria-label="Replay selection">
+          <div class="select-field match-field">
+            <label for="matchSelect">Match</label>
+            <select id="matchSelect" disabled><option>Loading approved replays…</option></select>
+          </div>
+          <div class="select-field half-field">
+            <label for="halfSelect">Half</label>
+            <select id="halfSelect" disabled><option>—</option></select>
+          </div>
+          <div class="sequence-name" aria-live="polite">
+            <span class="micro-label">SEQUENCE</span>
+            <strong id="sequenceTitle">Waiting for public replay index</strong>
+          </div>
+          <p class="data-state" id="dataState" role="status" aria-live="polite">Loading local public replay files…</p>
+        </div>
+
+        <div class="replay-workbench" id="replayWorkbench" aria-busy="true">
+          <div class="field-column">
+            <div class="field-label-row">
+              <div>
+                <p class="micro-label">OBSERVED POSITIONS <span class="field-live-dot"></span></p>
+                <p class="field-caption" id="fieldCaption">Select a published sequence to begin.</p>
+              </div>
+              <button class="quiet-button" id="resetView" type="button" disabled>Reset view</button>
+            </div>
+            <div class="pitch-shell">
+              <canvas id="pitchCanvas" aria-label="Football pitch showing observed player positions and the latest supported ball observation. Select a replay to load data.">
+                The interactive pitch requires canvas support.
+              </canvas>
+              <div class="pitch-overlay-label" aria-hidden="true"><span>HOME</span><span>AWAY</span></div>
+              <p class="pitch-empty" id="pitchEmpty">Choose a replay to draw the field.</p>
+            </div>
+            <div class="pitch-legend" aria-label="Pitch legend">
+              <span><i class="legend-dot home-dot"></i> Home</span>
+              <span><i class="legend-dot away-dot"></i> Away</span>
+              <span><i class="legend-dot ball-dot"></i> Ball observation</span>
+              <span class="legend-note">Numbers are source roster numbers</span>
+            </div>
+            <div class="display-controls" aria-label="Display options">
+              <label class="toggle-control"><input type="checkbox" id="numbersToggle" checked disabled /><span class="toggle-ui"></span><span>Numbers</span></label>
+              <label class="toggle-control"><input type="checkbox" id="gridToggle" disabled /><span class="toggle-ui"></span><span>Grid</span></label>
+              <label class="toggle-control"><input type="checkbox" id="trailsToggle" disabled /><span class="toggle-ui"></span><span>Recent trails</span></label>
+              <label class="toggle-control"><input type="checkbox" id="regionsToggle" disabled /><span class="toggle-ui"></span><span>Region diagram</span></label>
+              <div class="color-control"><label for="homeColor">H</label><input id="homeColor" type="color" value="#d6e79d" aria-label="Home team color" disabled /></div>
+              <div class="color-control"><label for="awayColor">A</label><input id="awayColor" type="color" value="#ee946d" aria-label="Away team color" disabled /></div>
+            </div>
+            <p class="display-note" id="displayNote">Positions are held at the latest observation. Ball support age is shown at the selected frame; optional trails connect consecutive observed points and break at missing samples.</p>
+
+            <div class="timeline-block" aria-label="Possession timelines">
+              <div class="timeline-head">
+                <p class="micro-label">STATE BY FRAME</p>
+                <label class="reference-toggle"><input type="checkbox" id="referenceToggle" disabled /><span>Show reference</span></label>
+              </div>
+              <div class="timeline-ruler" aria-hidden="true"><span>0:00</span><span id="rulerMid">—</span><span id="rulerEnd">—</span></div>
+              <div class="timeline-lane" data-lane="v2">
+                <span class="lane-name"><b>V2</b><small>selected</small></span>
+                <div class="lane-track" id="trackV2" aria-hidden="true"><span class="lane-marker"></span></div>
+              </div>
+              <div class="timeline-lane" data-lane="v1">
+                <span class="lane-name"><b>V1</b><small>baseline</small></span>
+                <div class="lane-track" id="trackV1" aria-hidden="true"><span class="lane-marker"></span></div>
+              </div>
+              <div class="timeline-lane reference-lane" id="referenceLane" hidden>
+                <span class="lane-name"><b>REF</b><small id="referenceCaption">reference</small></span>
+                <div class="lane-track" id="trackReference" aria-hidden="true"><span class="lane-marker"></span></div>
+              </div>
+              <div class="state-key" aria-label="Possession state colors">
+                <span><i class="state-swatch state-h"></i>H · Home</span>
+                <span><i class="state-swatch state-a"></i>A · Away</span>
+                <span><i class="state-swatch state-d"></i>D · Dead</span>
+                <span><i class="state-swatch state-x"></i>X · Unlabelled</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="state-rail" aria-label="Current replay evidence">
+            <div class="current-state-block">
+              <p class="micro-label"><span class="state-pulse"></span> CURRENT V2 STATE</p>
+              <div class="state-display" id="stateDisplay" data-state="X" aria-live="polite" aria-atomic="true">
+                <span class="state-letter" id="stateLetter">X</span>
+                <span class="state-word" id="stateWord">Unlabelled</span>
+              </div>
+              <p class="state-context" id="stateContext">No replay loaded.</p>
+            </div>
+            <div class="reading-list">
+              <div class="reading-row"><span>V1 at frame</span><strong id="v1State">—</strong></div>
+              <div class="reading-row"><span>V2 at frame</span><strong id="v2State">—</strong></div>
+              <div class="reading-row" id="referenceReading" hidden><span>Reference</span><strong id="referenceState">—</strong></div>
+            </div>
+            <div class="evidence-reading">
+              <p class="micro-label">OBSERVATION SUPPORT</p>
+              <div class="evidence-age"><strong id="observationAge">—</strong><span id="observationStatus">awaiting replay</span></div>
+              <p id="observationDetail">Ball and player coordinates are read from the nearest preceding published sample.</p>
+            </div>
+            <div class="measurement-reading">
+              <p class="micro-label">AVAILABLE AT THIS SAMPLE</p>
+              <dl id="measurementList"><div><dt>Ball observed</dt><dd>—</dd></div><div><dt>Player coverage</dt><dd>—</dd></div></dl>
+              <p class="measurement-footnote">Values retain declared units; evidence scores are uncalibrated.</p>
+            </div>
+            <div class="provenance-note">
+              <span class="provenance-mark" aria-hidden="true">i</span>
+              <p id="provenanceText">The displayed coordinates are a thinned, rounded view. Full-rate labels and evaluation rows are unchanged.</p>
+            </div>
+          </aside>
+        </div>
+
+        <div class="transport" aria-label="Replay controls">
+          <div class="transport-main">
+            <div class="transport-buttons">
+              <button class="icon-button" id="stepBack" type="button" aria-label="Go back one frame" disabled>−1</button>
+              <button class="play-button" id="playButton" type="button" aria-label="Play replay" disabled><span class="play-icon" aria-hidden="true"></span><span id="playText">Play</span></button>
+              <button class="icon-button" id="stepForward" type="button" aria-label="Go forward one frame" disabled>+1</button>
+            </div>
+            <label class="speed-select"><span class="micro-label">SPEED</span><select id="speedSelect" disabled><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label>
+            <div class="transport-divider"></div>
+            <button class="text-button" id="previousChange" type="button" aria-label="Previous home-away possession change in V2" title="Seek the previous H to A or A to H change in V2" disabled>← Previous H↔A</button>
+            <button class="text-button" id="nextChange" type="button" aria-label="Next home-away possession change in V2" title="Seek the next H to A or A to H change in V2" disabled>Next H↔A →</button>
+          </div>
+          <div class="seek-area">
+            <label class="sr-only" for="frameRange">Seek replay frame</label>
+            <input id="frameRange" type="range" min="0" max="0" value="0" step="1" disabled />
+            <div class="seek-meta"><span id="elapsedTime">0:00.0</span><span>FRAME <b id="frameReadout">—</b></span><span id="durationTime">—</span></div>
+          </div>
+          <div class="direct-seek">
+            <label for="frameInput"><span class="micro-label">GO TO FRAME</span><input id="frameInput" type="number" min="0" value="0" inputmode="numeric" disabled /></label>
+            <button class="small-button" id="seekFrameButton" type="button" disabled>Go</button>
+            <label for="timeInput"><span class="micro-label">GO TO TIME</span><input id="timeInput" type="text" value="0:00.0" placeholder="m:ss.s" inputmode="decimal" disabled /></label>
+            <button class="small-button" id="seekTimeButton" type="button" disabled>Go</button>
+            <button class="share-button" id="shareButton" type="button" disabled>Share view <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="share-link-row" id="shareLinkRow" hidden>
+            <label for="shareLink">Shareable replay position</label>
+            <input id="shareLink" type="url" readonly />
+            <span id="shareStatus" aria-live="polite">Select and copy the link.</span>
+          </div>
+        </div>
+
+        <div class="replay-footnote-row">
+          <p id="replayScope">External replay labels come from the published source and are provided for descriptive inspection.</p>
+          <button class="text-link-button" id="exportButton" type="button" disabled>Export current field PNG <span aria-hidden="true">↗</span></button>
+        </div>
+        <figure class="synthetic-video-panel" id="videoPanel" hidden>
+          <figcaption><span class="micro-label">SYNTHETIC CAMERA REFERENCE</span><span>Software fixture only · not match footage</span></figcaption>
+          <video id="syntheticVideo" muted playsinline preload="metadata" aria-label="Synthetic football tracking demo video"></video>
+        </figure>
+      </section>
+
+      <section class="method-section section-wrap" id="method" aria-labelledby="methodTitle">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 — THE METHOD</p>
+            <h2 id="methodTitle">Two estimates.<br /><em>One sequence.</em></h2>
+          </div>
+          <p class="section-intro">A pair of shallow classifiers describes ball activity and team ownership. A whole-half decoder then selects a coherent path from those per-frame probabilities.</p>
+        </div>
+        <div class="method-layout">
+          <div class="method-equation" aria-label="Probability decomposition">
+            <p class="micro-label">PROBABILITY DECOMPOSITION</p>
+            <div><span>P(H)</span><b>=</b><span>a · h</span></div>
+            <div><span>P(A)</span><b>=</b><span>a · (1 − h)</span></div>
+            <div><span>P(D)</span><b>=</b><span>1 − a</span></div>
+            <p><i>a</i> = live-ball estimate<br /><i>h</i> = home-ownership estimate</p>
+          </div>
+          <ol class="method-steps">
+            <li><span class="step-number">01</span><div><h3>Build observable context</h3><p>65 observable features use centered valid-support windows of 0.4, 2 and 4 seconds, plus previous and next near-control observations within 5 seconds.</p></div></li>
+            <li><span class="step-number">02</span><div><h3>Estimate activity and side</h3><p>Two shallow histogram-gradient-boosted heads estimate live/dead state and home/away ownership. Team-swap augmentation and symmetric prediction reduce side bias.</p></div></li>
+            <li><span class="step-number">03</span><div><h3>Form the state probabilities</h3><p>The live-ball estimate <i>a</i> gates the ownership estimate <i>h</i>: possession by either side is active-ball probability times side probability; dead ball is the remainder.</p></div></li>
+            <li><span class="step-number">04</span><div><h3>Decode the whole half</h3><p>Viterbi selects a path across the full half with a transition penalty of 10. It uses future context, so this is an offline decoder—not a live causal predictor.</p></div></li>
+          </ol>
+        </div>
+        <div class="method-qualification"><span class="qualification-symbol">↳</span><p>Possession states are model outputs, not calibrated confidence. Short possessions, provider-label semantics, and source-to-target shift remain meaningful limits.</p></div>
+      </section>
+
+      <section class="evidence-section section-wrap" id="evidence" aria-labelledby="evidenceTitle">
+        <div class="section-heading evidence-heading">
+          <div>
+            <p class="eyebrow">03 — THE EVIDENCE</p>
+            <h2 id="evidenceTitle">Six matches.<br /><em>Three scenarios.</em></h2>
+          </div>
+          <p class="section-intro">Six external matches already consumed in grouped development, evaluated across three excluded-match folds and three source scenarios.</p>
+        </div>
+        <div class="evidence-summary" id="evidenceSummary" aria-live="polite">
+          <div class="summary-value"><span class="micro-label">MEAN SPELL F1</span><p><b id="spellV1">—</b><i>V1</i><span class="summary-arrow">→</span><b id="spellV2">—</b><i>V2</i></p></div>
+          <div class="summary-value"><span class="micro-label">MEAN MACRO F1</span><p><b id="macroV1">—</b><i>V1</i><span class="summary-arrow">→</span><b id="macroV2">—</b><i>V2</i></p></div>
+          <p class="summary-scope">Selection-conditioned grouped development<br /><strong>Reused-source evidence · not independent or target</strong></p>
+        </div>
+        <div class="benchmark-toolbar">
+          <div><p class="micro-label">DEVELOPMENT ROWS</p><p id="benchmarkCount">Waiting for published table…</p><p class="benchmark-scenario-note">Table scenarios include source stress tests; the replay uses original observations.</p></div>
+          <label for="scenarioFilter">Scenario <select id="scenarioFilter" disabled><option value="all">All source scenarios</option></select></label>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable development benchmark table">
+          <table class="benchmark-table">
+            <thead>
+              <tr><th scope="col">Match</th><th scope="col">Scenario</th><th scope="col">Spell F1<br /><small>V1</small></th><th scope="col">Spell F1<br /><small>V2</small></th><th scope="col">Macro F1<br /><small>V1</small></th><th scope="col">Macro F1<br /><small>V2</small></th><th scope="col">Inference s<br /><small>V1</small></th><th scope="col">Inference s<br /><small>V2</small></th></tr>
+            </thead>
+            <tbody id="benchmarkRows"><tr><td colspan="8" class="table-placeholder">Published development measurements load with the approved public data.</td></tr></tbody>
+          </table>
+        </div>
+        <div class="evidence-notes">
+          <p><span class="micro-label">HOW TO READ THIS</span><br /><span id="benchmarkInterpretation">These values describe reused-source grouped development, not independent or target performance.</span></p>
+          <p><span class="micro-label">SCOPE BOUNDARY</span><br />WMX 0.5240 is a descriptive artifact check on already consumed source data. V3/V4/V5 did not clear replacement gates; selected V2 remains unchanged.</p>
+        </div>
+        <div class="source-links">
+          <p class="micro-label">PUBLIC SOURCES</p>
+          <a href="https://doi.org/10.6084/m9.figshare.28196177.v1" target="_blank" rel="noreferrer">Tracking data source ↗</a>
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0 license ↗</a>
+          <a href="https://github.com/Hasnaathussain/malwarous-possession" target="_blank" rel="noreferrer">Code and source manifest ↗</a>
+          <span id="sourceCredit">Source credit: Bassek, Rein, Weber and Memmert.</span>
+        </div>
+      </section>
+
+      <section class="decoder-section section-wrap" id="decoder-lab" aria-label="Synthetic decoder lab">
+        <div id="sandboxRoot"></div>
+      </section>
+    </main>
+    <footer class="site-footer section-wrap">
+      <a class="footer-wordmark" href="#top">MALWAROUS / POSSESSION ATLAS</a>
+      <p>Offline sequence model · public licensed replay · synthetic decoder fixtures</p>
+      <a href="#top" class="back-top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>

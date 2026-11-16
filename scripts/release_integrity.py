@@ -10,6 +10,9 @@ MODEL = 'models_private/v2-possession.joblib'
 
 MODEL_SHA256 = 'c6deb427e42dca2b2d35ffa47576f4fbb94509729c0216b46312b1f367c2418d'
 
+PUBLIC_VIDEO = 'website/media/synthetic-demo.mp4'
+PUBLIC_VIDEO_SHA256 = '61d04f220ac6aae121b930626ddeb46cd756e3c3f65a2e6e0bebf7b6f21c2f2c'
+
 REPORT_SHA256 = '743702395ee6e95a6bb769608527af95423c8ab7b34903182783241d6ff9e8e8'
 
 MATCHES = ['J03WN1', 'J03WOY', 'J03WPY', 'J03WOH', 'J03WQQ', 'J03WR9']
@@ -68,7 +71,10 @@ def checked_file(root: Path, name: str) -> Path:
 
 def source_bytes(root: Path, name: str) -> bytes:
     content = checked_file(root, name).read_bytes()
-    if name != MODEL:
+    if name == PUBLIC_VIDEO:
+        if digest(content) != PUBLIC_VIDEO_SHA256:
+            raise ValueError('public synthetic video checksum differs')
+    elif name != MODEL:
         content.decode('utf-8')
         if b'\x00' in content:
             raise ValueError(f'binary content in text allowlist: {name}')

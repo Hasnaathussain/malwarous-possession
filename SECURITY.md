@@ -1,8 +1,16 @@
 # Security and data handling
 
-This is a single-user local research application. The workbench binds only to
+The analysis workbench is a single-user local research application. It binds only to
 `127.0.0.1`, serves explicit routes/media IDs, and has no uploads, authentication
 service, telemetry or external browser dependencies. It is not a public web server.
+
+Possession Atlas (`website/`) is a separate static public site. It serves only
+approved licensed external replays and synthetic fixtures, with no backend,
+uploads, credentials, analytics or browser dependencies. Its Vercel configuration
+restricts scripts and network requests to its own origin, forbids framing and
+disables camera/microphone/location permissions. The optional local website
+preview binds to loopback, rejects hidden/out-of-root files and supports media
+byte ranges. Hosting must use `website/` as its root, never the research workspace.
 
 No API keys or cloud credentials are required. Competition assets, target labels,
 predictions, private viewer exports and logs must stay outside Git history, even

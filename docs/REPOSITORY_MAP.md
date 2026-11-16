@@ -11,6 +11,10 @@
 | `models_private/v2-possession.joblib` | The one included, external-only fitted model |
 | `evaluation/` | Unmodified organizer metric and validator |
 | `workbench/` | Local analyst interface and synthetic demonstration |
+| `website/` | Public Possession Atlas: static replay, method guide and synthetic decoder lab |
+| `website/PUBLIC_DATA.md` | Licensed public replay provenance and display transformations |
+| `scripts/serve_public_site.py` | Loopback-only public website preview with video range requests |
+| `scripts/export_public_site.py` | Export only the approved external and synthetic public fixtures |
 | `docs/experiments/` | External development protocol and benchmark evidence |
 | `docs/TEAM_COMPARISON.md` | Fair comparison of three team members' methods |
 | `tests/` | Synthetic contracts, source checks and local HTTP tests |
@@ -35,4 +39,7 @@ Your environment is `.venv/`. Local predictions and detailed run diagnostics go 
 `artifacts_private/`. External acquisition caches go in `external_data_cache/`.
 These are ignored local working files and must not be committed. The included
 external-only fitted model is the single intentional exception under
-`models_private/`, with attribution in `MODEL_ATTRIBUTION.md`.
+`models_private/`, with attribution in `MODEL_ATTRIBUTION.md`. The public website
+also includes CC BY 4.0 external display replays and one hash-pinned synthetic
+video, described in `website/PUBLIC_DATA.md`. These are public fixtures, not
+competition assets or generated target predictions.

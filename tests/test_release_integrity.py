@@ -47,3 +47,18 @@ def test_linked_file_is_rejected_before_reading(tmp_path, monkeypatch):
     monkeypatch.setattr(Path, 'is_symlink', lambda self: self == path or original(self))
     with pytest.raises(ValueError, match='linked source path'):
         release.checked_file(tmp_path, 'example.py')
+
+
+def test_public_video_exception_is_fixed_path_and_checksum_gated(tmp_path, monkeypatch):
+    video = tmp_path / release.PUBLIC_VIDEO
+    video.parent.mkdir(parents=True)
+    content = b'\x00synthetic video fixture\xff'
+    video.write_bytes(content)
+    with pytest.raises(ValueError, match='synthetic video checksum differs'):
+        release.source_bytes(tmp_path, release.PUBLIC_VIDEO)
+    monkeypatch.setattr(release, 'PUBLIC_VIDEO_SHA256', release.digest(content))
+    assert release.source_bytes(tmp_path, release.PUBLIC_VIDEO) == content
+    other = video.with_name('other.mp4')
+    other.write_bytes(content)
+    with pytest.raises(UnicodeDecodeError):
+        release.source_bytes(tmp_path, 'website/media/other.mp4')
