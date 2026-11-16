@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Dependency-free public replay and explanation of the Malwarous possession model"
+  "description": "Dependency-free public replay and explanation of the Malwarous possession model",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
 }
