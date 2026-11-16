@@ -67,3 +67,7 @@ Before submitting, use the exact committed submission/Malwarous.csv and submissi
 ## Concurrent Analytics repair
 
 Remote main acquired Vercel PR1 during this work. Its bare @vercel/analytics import cannot resolve in a buildless browser module and prevented the deployed replay from starting. The merge retains the intended optional Web Analytics using the official plain-HTML endpoint in a separate script; removes the unused npm dependency/lock; and keeps replay startup independent. No source/model lock was changed. Local/automated browsers do not send analytics; deep-link parameters are redacted. This explains the reported stuck loading without attributing it to model behavior.
+
+## Independent documentation review
+
+A final read-only review corrected historical V1 recommendation wording, qualified V5 as the last training attempt before cache-only V6, and expanded the dependency table with direct test references. The selected config pins19 source files plus the report and fitted artifact (21 total), not21 source files. No model, CSV, PDF or website behavior changed in this documentation pass. Recursive ignored-cache cleanup was rejected by automatic approval review as blocked by policy; no bypass was attempted, and ignored local caches remain outside Git/deployment.

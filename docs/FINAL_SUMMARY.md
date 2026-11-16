@@ -30,7 +30,7 @@ score. See [the fixed check](experiments/FINAL_EXTERNAL_RESULTS.md).
 | Contact specialist, V4 | 0.48658 | Failed replacement and added-value gates |
 | Spell-balanced ownership, V5 selected mixture | 0.48475 | Failed replacement and added-value gates |
 
-V5 was the final bounded attempt: one owner head per excluded fold, using clipped
+V5 was the last bounded training attempt before the cache-only V6 audit: one owner head per excluded fold, using clipped
 square-root inverse spell-length training weights derived at full rate before
 sampling; the existing V2 alive/dead evidence was preserved. Its two fixed mixture
 variants and baseline completed all 54 rows. The registered selection rule allowed

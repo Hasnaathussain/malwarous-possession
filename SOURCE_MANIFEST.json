@@ -69,22 +69,22 @@
       "sha256": "6919b815cb131f4965d09e07d508cceabccf01963055c70dd3fe3a1655d1a01f"
     },
     {
-      "bytes": 7980,
+      "bytes": 8578,
       "classification": "source_or_external_report",
       "path": "docs/CONTINUATION_LEDGER.md",
-      "sha256": "ba2e86d1316abf6f2eece43766a3c5028401c3944cc0d6e5b833018d8b35af7b"
+      "sha256": "de21b5f4c1ef1e7380e0fd9f2013f014288575c3c72108994be9d238bef3c1f1"
     },
     {
-      "bytes": 4412,
+      "bytes": 4451,
       "classification": "source_or_external_report",
       "path": "docs/FINAL_SUMMARY.md",
-      "sha256": "00671ca2473afb80ee455b6e4d96f24afde381d54e11c75328c9889c83de0beb"
+      "sha256": "50cf98630e18e57263b01a77c64986f5853c5aca50bde7c1fbc6742f1a92cb34"
     },
     {
-      "bytes": 6273,
+      "bytes": 7255,
       "classification": "source_or_external_report",
       "path": "docs/FROZEN_DEPENDENCIES.md",
-      "sha256": "dc1afd0194a4b43ef7fbe5c78d2066ec7736629a35c2fdcd960f92195899a8e5"
+      "sha256": "38b0c3be7a1bda9b0eaec905aa741b48f79c4364d8f0c199a175c3c622a7e02d"
     },
     {
       "bytes": 13582,
@@ -123,10 +123,10 @@
       "sha256": "86e0e003442600b42739afa193ed97fd6c1397749012264c64113cb4a6308024"
     },
     {
-      "bytes": 8536,
+      "bytes": 8756,
       "classification": "source_or_external_report",
       "path": "docs/V2_GUIDE.md",
-      "sha256": "933c7e8d19c04fd212138090ebebc63c0c1138588d81d6c51338b79f60427d45"
+      "sha256": "27f0f52442903135f4e731e476bec759fb65f7cc3f8ebd4f995c5da00784a569"
     },
     {
       "bytes": 5578,
