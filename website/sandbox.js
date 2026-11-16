@@ -246,6 +246,16 @@ function validateEvidence(evidence) {
   });
 }
 
+/** Centered mean for illustrative log scores, with truncated edges. */
+export function smoothEvidence(evidence, radius = 0) {
+  const rows = validateEvidence(evidence);
+  if (!Number.isInteger(radius) || radius < 0 || radius > 12) throw new RangeError('Radius must be an integer from 0 to 12 bins.');
+  return rows.map((_, i) => {
+    const window = rows.slice(Math.max(0, i-radius), Math.min(rows.length, i+radius+1));
+    return [0,1,2].map(k => window.reduce((sum, row) => sum+row[k],0)/window.length);
+  });
+}
+
 function validatePenalty(penalty) {
   if (!Number.isFinite(penalty) || penalty < 0) throw new RangeError("The transition penalty must be a finite, non-negative number.");
   return penalty;
@@ -551,7 +561,7 @@ export function mountSandbox(rootElement) {
   }
 
   const instanceId = ++nextInstanceId;
-  let state = { preset: "short-regain", penalty: 10, regainLength: 3, noise: 15 };
+  let state = { preset: "short-regain", penalty: 10, regainLength: 3, noise: 15, radius: 0 };
   let renderTimer = null;
   const style = makeElement("style");
   style.textContent = LAB_STYLES;
@@ -607,6 +617,7 @@ export function mountSandbox(rootElement) {
     min: 0, max: 50, value: state.penalty,
     help: "Cost for each adjacent state change. V2’s submitted setting is 10.",
   });
+  const radiusControl = makeRangeControl({id: `lab-radius-${instanceId}`, label: "Emission radius", min: 0, max: 6, value: state.radius, help: "Centered averaging radius in half-second fixture bins. Zero preserves raw evidence; this is not a model setting change."});
   const regainControl = makeRangeControl({
     id: `lab-regain-${instanceId}`,
     label: "Short regain length",
@@ -626,7 +637,7 @@ export function mountSandbox(rootElement) {
   const regainOutput = regainControl.output;
   const noiseOutput = noiseControl.output;
   regainInput.disabled = false;
-  controls.append(penaltyControl.wrapper, regainControl.wrapper, noiseControl.wrapper);
+  controls.append(penaltyControl.wrapper, radiusControl.wrapper, regainControl.wrapper, noiseControl.wrapper);
   const resetButton = makeElement("button", "lab-button lab-button-reset", "Reset lab");
   resetButton.type = "button";
   controls.appendChild(resetButton);
@@ -744,7 +755,7 @@ export function mountSandbox(rootElement) {
   rootElement.append(style, shell);
 
   function render() {
-    const evidence = generateEvidence(state);
+    const evidence = smoothEvidence(generateEvidence(state), state.radius);
     const rawPath = argmaxPath(evidence);
     const decoded = decodeViterbi(evidence, state.penalty);
     const rawChanges = transitionsFor(rawPath);
@@ -775,10 +786,11 @@ export function mountSandbox(rootElement) {
     renderTimer = setTimeout(() => {
       renderTimer = null;
       render();
-      status.textContent = `Results updated. Raw path: ${transitionsFor(argmaxPath(generateEvidence(state))).length} changes; Viterbi path: ${transitionsFor(decodeViterbi(generateEvidence(state), state.penalty).path).length} changes.`;
+      status.textContent = `Results updated. Raw path: ${transitionsFor(argmaxPath(smoothEvidence(generateEvidence(state), state.radius))).length} changes; Viterbi path: ${transitionsFor(decodeViterbi(smoothEvidence(generateEvidence(state), state.radius), state.penalty).path).length} changes.`;
     }, 110);
   }
 
+  radiusControl.input.addEventListener("input", () => { state.radius = Number(radiusControl.input.value); radiusControl.output.textContent = String(state.radius); scheduleRender(); });
   penaltyInput.addEventListener("input", () => {
     state.penalty = Number(penaltyInput.value);
     penaltyOutput.textContent = String(state.penalty);
@@ -798,7 +810,8 @@ export function mountSandbox(rootElement) {
   resetButton.addEventListener("click", () => {
     if (renderTimer !== null) clearTimeout(renderTimer);
     renderTimer = null;
-    state = { preset: "short-regain", penalty: 10, regainLength: 3, noise: 15 };
+    state = { preset: "short-regain", penalty: 10, regainLength: 3, noise: 15, radius: 0 };
+    radiusControl.input.value = "0"; radiusControl.output.textContent = "0";
     penaltyInput.value = String(state.penalty);
     regainInput.value = String(state.regainLength);
     noiseInput.value = String(state.noise);

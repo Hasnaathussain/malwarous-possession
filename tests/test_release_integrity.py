@@ -62,3 +62,19 @@ def test_public_video_exception_is_fixed_path_and_checksum_gated(tmp_path, monke
     other.write_bytes(content)
     with pytest.raises(UnicodeDecodeError):
         release.source_bytes(tmp_path, 'website/media/other.mp4')
+
+
+def test_only_hash_pinned_public_preview_images_are_allowed(tmp_path):
+    import hashlib
+    from scripts import release_integrity as review
+    public = tmp_path / 'docs' / 'figures'
+    public.mkdir(parents=True)
+    name = next(iter(review.PUBLIC_FIGURES))
+    destination = tmp_path / name
+    destination.write_bytes(b'not an approved image')
+    with pytest.raises(ValueError, match='public figure checksum'):
+        review.source_bytes(tmp_path, name)
+    unknown = public / 'unreviewed.png'
+    unknown.write_bytes(b'\x00unreviewed')
+    with pytest.raises(ValueError):
+        review.source_bytes(tmp_path, 'docs/figures/unreviewed.png')

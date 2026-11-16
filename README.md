@@ -1,136 +1,137 @@
+<div align="center">
+
 # Malwarous
 
-Possession inference from incomplete football tracking, with a local analysis workbench
-and **Possession Atlas**, an interactive public replay and model guide.
+### Read possession through the gaps.
 
-**[Open Possession Atlas](https://malwarous-atlas.vercel.app)** ·
-[Website guide](website/README.md) · [Technical note](docs/TECHNICAL_NOTE.md)
+An offline football possession engine with observable context, persistent sequence decoding, and an inspectable match replay.
 
-The frozen candidate is **context_p10_r0**: two contextual tree classifiers and
-half-wise persistent decoding. It uses 65 observable features, team symmetry and
-explicit observation support. It is an **offline** method using future context.
+**Muhammad Hasnaat Hussain · Kabir Niazi · Younus Rehmatullah**
 
-| Matched external development | spellF1 | macroF1 |
+![Python 3.11.9](https://img.shields.io/badge/Python-3.11.9-123d32)
+![MIT code](https://img.shields.io/badge/code-MIT-123d32)
+![External data CC BY 4.0](https://img.shields.io/badge/external_data-CC_BY_4.0-123d32)
+![Frame contract](https://img.shields.io/badge/25_fps-199%2C319_frames-123d32)
+
+**[Open interactive Atlas →](https://malwarous-atlas.vercel.app)** · [Technical PDF](submission/Malwarous.pdf) · [Repository guide](docs/REPOSITORY_MAP.md)
+
+[![Possession Atlas: licensed external tracking replay](docs/figures/atlas-replay.png)](https://malwarous-atlas.vercel.app/#replay)
+
+<sub>Licensed external replay: Bassek, Rein, Weber & Memmert, CC BY 4.0. Positions thinned for display; state intervals retain full frame support. No competition-match imagery.</sub>
+
+</div>
+
+## At a glance
+
+The frozen submission is **`context_p10_r0`**. It produces H / A / D / X labels from tactical tracking, treats missing observations as missing evidence, and decodes each half independently. It uses future context and runs offline.
+
+Atlas lets you play six licensed matches, compare V1/V2 timelines, zoom into spells, inspect observation support and evidence, and explore a synthetic decoder. It replays saved development outputs; it is not live model inference. The squad cards introduce our community through a football metaphor.
+
+## Method
+
+```mermaid
+flowchart LR
+    T[Tracking + team/pitch metadata] --> F[65 observable features]
+    F --> C[Centered context: 0.4 / 2 / 4 s]
+    C --> A[Live/dead head]
+    C --> O[Home/away head + team symmetry]
+    A --> E[H / A / D log evidence]
+    O --> E
+    E --> V[Half-wise Viterbi: penalty 10]
+    V --> CSV[Algorithmic frame,label CSV]
+```
+
+No match ID, player identity or absolute match-time feature enters the model. A fixed switching cost suppresses weak flicker without imposing a hard minimum possession length. The target adapter supplies the official frame/half contract; it does not prescribe possession labels.
+
+## External development evidence
+
+**Six reused external matches, three whole-match excluded folds, three observation scenarios, 18 paired rows. These are selection-conditioned development measurements, not independent validation or competition scores.**
+
+| Method | Mean spellF1 | Mean macroF1 |
 |---|---:|---:|
-| smooth50 reference | 0.25548 | 0.39809 |
-| frozen candidate | 0.48095 | 0.86868 |
+| V1 smooth50 reference | 0.25548 | 0.39809 |
+| Frozen V2 `context_p10_r0` | **0.48095** | **0.86868** |
 
-Six previously consumed DFL matches, three whole-match excluded folds and three
-observation scenarios. These are selection-conditioned development measurements,
-not blind-test results or competition scores. See [results](docs/FINAL_SUMMARY.md).
+The reference is our matched smooth50 implementation; this table does not compare against every organizer baseline. The all-six fitted artifact's J03WMX check (0.5240 / 0.9185) is descriptive: that match was previously consumed in a V1 audit. [Full evidence](docs/FINAL_SUMMARY.md).
 
-## Start
+The registered V6 transition study re-examined existing penalties on the same 18 external rows. Penalties 25 and 50 both failed the replacement gate; p10 remains shipped. Smart Tagging fusion was not promoted without adequate external timing/independence evidence. [All V6 rows and losses](docs/experiments/V6_RESULTS.md).
 
-For the public website, no dependencies are required: run
-`python -B scripts/serve_public_site.py --port 8788` and open
-http://127.0.0.1:8788. Explore six licensed matches, possession timelines, observation
-support, development results and a synthetic decoder lab. This replays saved
-outputs from the offline model. [Website guide](website/README.md) and
-[public data provenance](website/PUBLIC_DATA.md).
+<details>
+<summary>Inspect the evidence and the synthetic decoder</summary>
 
-Use 64-bit Python 3.11.9 and the pinned dependencies. From the repository root:
+[![External observation evidence traces](docs/figures/atlas-evidence.png)](https://malwarous-atlas.vercel.app/#replay)
 
-Linux/macOS:
+*Licensed external observations: Bassek et al., CC BY 4.0. Raw log evidence is uncalibrated; it is not confidence.*
+
+[![Synthetic decoder lab](docs/figures/decoder-lab.png)](https://malwarous-atlas.vercel.app/#decoder-lab)
+
+*Synthetic software fixture. Lab controls illustrate a decoder; they do not change fitted weights or establish accuracy.*
+
+</details>
+
+## Reproduce
+
+Use **64-bit CPython 3.11.9**. Put the separately authorized competition bundle outside Git, then run these four commands from the repository root on Linux/macOS:
 
 ```sh
 python3.11 -m venv .venv
 .venv/bin/python -m pip install -r requirements.lock
-.venv/bin/python -m pip install -r requirements-test.in
-.venv/bin/python -m pytest -q
-.venv/bin/python -m workbench.server --port 8765
+MTAH_DATA_DIR='/path/to/authorized/bundle' .venv/bin/python -m malwarous.v2.safe_runner v2_target_infer
+MTAH_DATA_DIR='/path/to/authorized/bundle' .venv/bin/python -m malwarous.v2.safe_runner v2_target_reproduce
 ```
 
-Windows PowerShell:
+Check each command succeeds before advancing. No training/finalizer step is needed. The output is `artifacts_private/v2/Malwarous-v2.csv`; the second command independently regenerates it and requires byte identity. Linux/WSL CPython 3.11.9 with the lock reproduced the published CSV byte for byte, as did the Windows release environment. This is reproduction evidence, not accuracy evidence.
+
+<details>
+<summary>Windows PowerShell, local demos and verification</summary>
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.lock
-.\.venv\Scripts\python.exe -m pip install -r requirements-test.in
-.\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m workbench.server --port 8765
-```
-
-Open http://127.0.0.1:8765 for the generated synthetic demo. Its labels are authored
-software fixtures and its score cells are empty. The workbench has synchronized
-playback, frame navigation, evidence plots, provenance and keyboard controls.
-[Workbench guide](workbench/README.md).
-
-## Reproduce the submission locally
-
-The checked external-only fitted weights are included. **Do not run a training or
-finalizer command for setup.** Obtain the competition assets separately under the
-organizer's accepted terms and set their root:
-
-Linux/macOS:
-
-```sh
-export MTAH_DATA_DIR='/path/to/authorized/bundle'
-.venv/bin/python -m malwarous.v2.safe_runner v2_target_infer
-.venv/bin/python -m malwarous.v2.safe_runner v2_target_reproduce
-```
-
-Windows PowerShell:
-
-```powershell
 $env:MTAH_DATA_DIR='D:\path\to\authorized\bundle'
 .\.venv\Scripts\python.exe -m malwarous.v2.safe_runner v2_target_infer
 .\.venv\Scripts\python.exe -m malwarous.v2.safe_runner v2_target_reproduce
 ```
 
-Check that each command succeeds before advancing. The first writes the private
-`artifacts_private/v2/Malwarous-v2.csv`; the second independently regenerates it and
-requires byte identity. No target score is computed or reported. Source, report,
-configuration and model hashes are checked before target processing.
+Public Atlas preview: `python -B scripts/serve_public_site.py --port 8788` (no dependencies), then open http://127.0.0.1:8788. Local analysis workbench: `python -m workbench.server --port 8765`. Its default demonstration is synthetic.
 
-The team-requested final packet is published in `submission/`. Keep other generated outputs and all competition assets out of public Git. The optional private viewer
-export is `python -m malwarous.v2.safe_runner v2_local_viewer_export`; its files are
-for local human inspection only. Never send its bundle or viewport to a hosted
-model. Browser QA is for synthetic or licensed public-external fixtures only.
+Source integrity: `python -B scripts/verify_repository.py`. Tests: install `requirements-test.in`, then `python -m pytest -q`. Decoder checks: `node --test scripts/test_decoder_lab.mjs`.
 
-## Read
+</details>
 
-- [Technical note](docs/TECHNICAL_NOTE.md): the actual submission method.
-- [Model guide](docs/V2_GUIDE.md): features, inference and external reproduction.
-- [Data and model provenance](docs/V2_PROVENANCE.md) and [attribution](MODEL_ATTRIBUTION.md).
-- [Team comparison](docs/TEAM_COMPARISON.md): compare external predictions fairly.
-- [Repository map](docs/REPOSITORY_MAP.md): the purpose of each folder and older dependency names.
-- [Security](SECURITY.md) and [release checks](docs/RELEASE_CHECKS.md).
+## Assets used and not integrated
 
-## Submission files
-
-| Organizer form field | What to provide |
+| Asset | Selected pipeline |
 |---|---|
-| Team name | Malwarous |
-| Possession CSV | The regenerated file, named `Malwarous.csv` |
-| Public repository URL | https://github.com/Hasnaathussain/malwarous-possession |
-| Short technical document | [Technical note](docs/TECHNICAL_NOTE.md), uploaded as `Malwarous.md` or the prepared `Malwarous.pdf` |
+| Tactical ATD and its metadata | Used: positions, anonymous team membership, pitch geometry |
+| Official match constants | Used: frame count and separate half blocks |
+| External DFL/Sportec tracking + provider labels | Used: fitting and grouped development; CC BY 4.0 |
+| Smart Tagging | Not integrated. Public loader reviewed; restart windows are approximate, not exact D spans. External fusion qualification failed. |
+| Homography | Not integrated: the selected method consumes already projected pitch coordinates. |
+| Broadcast video / ATD | Not integrated: separate timeline; no validated automatic alignment or fusion. |
+| Tactical video | Not an inference input to selected V2. Human local viewing does not supply labels. |
 
-Copy the generated `artifacts_private/v2/Malwarous-v2.csv` to the team-named upload
-file without editing its contents. Upload the CSV and technical document through
-the organizer's form separately; they do not need to be committed here.
-Download the exact final packet from [Malwarous.csv](submission/Malwarous.csv) and [Malwarous.pdf](submission/Malwarous.pdf). Publishing these files does not submit the organizer form. All raw competition assets and other generated outputs remain excluded.
+“Not integrated” does not imply a completed benchmark or an unsuccessful implementation. No target human annotation, public-window tuning or frame-specific possession correction is used. [Technical note](docs/TECHNICAL_NOTE.md).
 
-This edition contains the selected algorithm and its dependencies. Older-named
-core modules/configs remain because the frozen runner verifies/imports them.
-Failed experimental versions, duplicate release folders, private planning, caches
-and raw data are excluded. The internal research workspace retains the full audit.
+## Find your way
 
-`SOURCE_MANIFEST.json` fingerprints every other committed file. Verify a clone:
+[Repository map](docs/REPOSITORY_MAP.md) is the authoritative guide. [Frozen dependency ledger](docs/FROZEN_DEPENDENCIES.md) explains why older-named files remain. They are hash-locked reproduction dependencies, not additional submission choices. [Team comparison](docs/TEAM_COMPARISON.md) describes a fair external comparison of teammates' methods.
 
-```powershell
-python -B scripts/verify_repository.py
-```
+## Limits
 
-The verifier checks the tracked inventory, staged bytes and raw source/report/model
-hashes. Ignored environments, logs and generated outputs are not committed source.
-`.gitattributes` preserves mixed LF/CRLF bytes required by frozen hashes. Do not
-run a line-ending formatter over locked sources.
+Short possessions remain difficult. Provider-label semantics, synthetic dropout realism and transfer to automatic tracking limit generalization. All external matches have been consumed; no fresh independent dense-label test qualified. No defensible full-match target-score range or competition rank is available. Source/model checks and passing tests do not prove accuracy or eliminate every security risk.
 
-Exact target-byte reproduction was verified on Windows with CPython 3.11.9.
-The standalone replay also passed Ubuntu preflight checks. Cross-platform ML
-byte identity has not been independently established; preserve the verified
-environment when regenerating the selected submission file.
+## Submit
 
-Code retains the organizer MIT notice in [LICENSE](LICENSE). External derived
-weights/results require the CC BY 4.0 credit in [MODEL_ATTRIBUTION.md](MODEL_ATTRIBUTION.md).
-Competition assets have separate restricted terms and are not included.
+| Form field | Team deliverable |
+|---|---|
+| Team | Malwarous; three registered technical members |
+| Possession file | [Malwarous.csv](submission/Malwarous.csv) |
+| Technical document | [Malwarous.pdf](submission/Malwarous.pdf), source [docs/Malwarous.html](docs/Malwarous.html) |
+| Public source | This repository |
+
+Validate the exact upload with `python evaluation/validate_submission.py submission/Malwarous.csv` and check its SHA-256 against `SOURCE_MANIFEST.json`. Publishing here does not submit the organizer form. [Release ledger and checklist](docs/CONTINUATION_LEDGER.md).
+
+## Attribution
+
+Code retains the organizer MIT notice in [LICENSE](LICENSE). External data and derived weights/results credit **Manuel Bassek, Robert Rein, Hendrik Weber and Daniel Memmert**, *An integrated dataset of spatiotemporal and event data in elite soccer*, [Figshare v1](https://doi.org/10.6084/m9.figshare.28196177.v1), CC BY 4.0; transformations are described in [MODEL_ATTRIBUTION.md](MODEL_ATTRIBUTION.md) and [public replay provenance](website/PUBLIC_DATA.md). Authors do not endorse this model. Competition assets have separate restricted terms and are excluded.

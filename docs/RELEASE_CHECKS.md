@@ -6,7 +6,7 @@ release. This repository contains code, pinned dependencies, external benchmark
 evidence, the local interface, the public Possession Atlas and one attributed
 external-only fitted artifact. Atlas includes only licensed external replay
 derivatives and a checksum-pinned synthetic video; see `website/PUBLIC_DATA.md`.
-Competition assets, target CSVs, private viewer data, credentials, logs, environments,
+Competition assets, other generated target CSVs, private viewer data, credentials, logs, environments,
 old releases, meeting media and internal planning are excluded.
 
 ## Evidence
@@ -87,3 +87,7 @@ References: [organizer submission requirements](https://github.com/metrica-sport
 On 16 November 2026, the team requested publication of the exact final CSV and PDF
 in `submission/`. They are byte copies of the final organizer packet; the source
 inventory covers both. This publication does not complete the organizer form.
+
+## Final continuation
+
+The frozen candidate/CSV remain unchanged after registered V6 diagnostics. Linux/WSL CPython3.11.9 with requirements.lock reproduced the published CSV byte for byte, then reproduced it independently again. The public-GT diagnostic request was not used for model tuning/validation. See CONTINUATION_LEDGER.md for all gates, cleanup, provenance, PDF source and final submission checklist. Newly committed preview PNGs are accepted by the integrity helper only at four exact paths and SHA256 values; arbitrary image binaries remain rejected.

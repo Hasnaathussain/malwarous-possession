@@ -46,7 +46,7 @@ try {
       const job = pending.get(item.id); pending.delete(item.id); clearTimeout(job?.timeout);
       if (item.error) job?.reject(new Error(JSON.stringify(item.error))); else job?.resolve(item.result);
     }
-    if (item.method === 'Runtime.exceptionThrown') errors.push(item.params.exceptionDetails.text);
+    if (item.method === 'Runtime.exceptionThrown') errors.push(item.params.exceptionDetails.exception?.description || item.params.exceptionDetails.text);
     if (item.method === 'Network.requestWillBeSent') requests.push(item.params.request.url);
     if (item.method === 'Network.responseReceived' && item.params.response.status >= 400) {
       failedResponses.push({url: item.params.response.url, status: item.params.response.status});
@@ -120,13 +120,42 @@ try {
   assert.notEqual(await evaluate(`document.getElementById('pitchCanvas').toDataURL()`), beforeColor);
   for (const id of ['gridToggle', 'trailsToggle', 'regionsToggle', 'referenceToggle']) await click(id);
   assert.equal(await evaluate(`document.getElementById('referenceLane').hidden`), false);
+  await evaluate(`document.getElementById('timelineZoom').value='12';document.getElementById('timelineZoom').dispatchEvent(new Event('change'))`);
+  assert.ok(Number(await evaluate(`document.getElementById('timelinePan').max`)) > 0);
+  await evaluate(`document.getElementById('stateFilter').value='H';document.getElementById('stateFilter').dispatchEvent(new Event('change'))`);
+  assert.equal(await evaluate(`document.getElementById('trackV2').dataset.filter`), 'H');
+  await click('differenceToggle');
+  assert.equal(await evaluate(`document.getElementById('differenceLane').hidden`), false);
+  assert.ok(await evaluate(`document.querySelectorAll('#trackDifference .lane-segment').length>0`));
+  await click('shortcutsButton');
+  assert.equal(await evaluate(`document.getElementById('shortcutsHelp').hidden`), false);
+  await click('shortcutsButton');
+  await click('fullscreenButton');
+  await waitFor(`!!document.fullscreenElement || document.getElementById('spellInspect').textContent.includes('Fullscreen is unavailable')`, 'fullscreen or explicit browser fallback');
+  await call('Runtime.evaluate', {expression:'document.exitFullscreen()',awaitPromise:true});
+  const point = await evaluate(`(()=>{const e=document.getElementById('evidenceCanvas');e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect();return{x:r.x+r.width*.6,y:r.y+r.height*.4}})()`);
+  await call('Input.dispatchMouseEvent', {type:'mouseMoved',...point});
+  assert.ok((await evaluate(`document.getElementById('evidenceTooltip').textContent`)).includes('Sample frame'));
+  await evaluate(`document.getElementById('timelineZoom').value='1';document.getElementById('timelineZoom').dispatchEvent(new Event('change'))`);
+  await evaluate(`document.getElementById('stateFilter').value='all';document.getElementById('stateFilter').dispatchEvent(new Event('change'))`);
+  const captureElement = async (selector, name) => {
+    const box = await evaluate(`(()=>{const r=document.querySelector(${JSON.stringify(selector)}).getBoundingClientRect();return{x:r.x+scrollX,y:r.y+scrollY,width:r.width,height:r.height,scale:1}})()`);
+    const result = await call('Page.captureScreenshot', {format:'png',clip:box,captureBeyondViewport:true});
+    await writeFile(path.join(folder,name),Buffer.from(result.data,'base64'));
+  };
+  await evaluate(`document.querySelector('.site-header').style.visibility='hidden';document.getElementById('spellInspect').textContent='Inspect a spell: zoom the timeline or use exact frame and time controls.'`);
+  await captureElement('.field-column','atlas-replay.png');
+  await captureElement('#evidencePlot','atlas-evidence.png');
+  await captureElement('#squad','atlas-squad.png');
+  await evaluate(`document.querySelector('.site-header').style.visibility=''`);
   await evaluate(`document.getElementById('decoder-lab').scrollIntoView()`);
-  await waitFor(`document.querySelectorAll('#sandboxRoot input[type=range]').length===3`, 'decoder lab');
+  await waitFor(`document.querySelectorAll('#sandboxRoot input[type=range]').length===4`, 'decoder lab');
   const labBefore = await evaluate(`document.querySelector('#sandboxRoot').textContent`);
   await evaluate(`(()=>{const p=document.querySelector('#sandboxRoot input[type=range]');p.value=50;p.dispatchEvent(new Event('input'))})()`);
   await sleep(200);
   assert.notEqual(await evaluate(`document.querySelector('#sandboxRoot').textContent`), labBefore);
   await screenshot('desktop-lab.png');
+  await captureElement('#sandboxRoot','decoder-lab.png');
   await evaluate(`(()=>{const s=document.getElementById('matchSelect');const o=[...s.options].find(o=>/synthetic|demo/i.test(o.textContent));if(!o)throw new Error('No synthetic choice');s.value=o.value;s.dispatchEvent(new Event('change'))})()`);
   await waitFor(`!document.getElementById('videoPanel').hidden && document.getElementById('syntheticVideo').readyState>=1`, 'synthetic media');
   await evaluate(`document.getElementById('frameRange').value=110;document.getElementById('frameRange').dispatchEvent(new Event('input'))`);
@@ -157,7 +186,7 @@ try {
     await call('Emulation.setDeviceMetricsOverride', {width, height: 844, deviceScaleFactor: 1, mobile: width < 800});
     await sleep(100);
     const layout = await evaluate(`({width:innerWidth,body:document.body.scrollWidth,document:document.documentElement.scrollWidth})`);
-    assert.ok(layout.width === width && layout.body <= width + 1 && layout.document <= width + 1, JSON.stringify(layout));
+    assert.ok(layout.width === width && layout.body <= width + 1 && layout.document <= width + 1, JSON.stringify({...layout,overflow:await evaluate(`Array.from(document.querySelectorAll('body *')).filter(e=>e.getBoundingClientRect().right>innerWidth && !e.closest('.table-scroll') && getComputedStyle(e).position!=='absolute').map(e=>({tag:e.tagName,id:e.id,cls:String(e.className),right:e.getBoundingClientRect().right})).slice(0,12)`)}));
   }
   assert.deepEqual(errors, [], 'Browser JavaScript exception');
   assert.deepEqual(failedResponses, [], 'Failed application response');
@@ -167,7 +196,7 @@ try {
     checks: ['public source gate', 'replay load', 'frame seek/step', 'transition jump', 'playback',
       'benchmark scenario filter', 'share URL', 'team colors and display controls', 'interactive decoder lab',
       'synthetic video seek/play clock', '320/390/768/1366px layouts', 'mobile navigation',
-      'attributed PNG export', 'browser errors', 'same-origin requests'], screenshots: folder}));
+      'attributed PNG export', 'zoom/minimap/state filters/difference view', 'fullscreen/help', 'evidence tooltips', 'browser errors', 'same-origin requests'], screenshots: folder}));
 } finally {
   socket?.close(); browser.kill();
 }

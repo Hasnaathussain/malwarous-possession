@@ -65,3 +65,7 @@ Use [the technical note](TECHNICAL_NOTE.md) and the top-level README for exact
 inference/reproduction commands. Use [the team protocol](TEAM_COMPARISON.md) to
 compare teammates on aligned external data. The short note and repository must
 describe whichever complete pipeline the team ultimately chooses.
+
+## Final registered decoder audit
+
+V6 re-examined already consumed p10/p25/p50 predictions on all18 external rows. Mean spellF1: p10 0.4809519, p25 0.4721337, p50 0.4437200. Mean transition F1@25: 0.5154486, 0.5076051, 0.4928354. Both alternatives failed the preregistered conjunctive gate; the frozen candidate and final CSV are unchanged. This is reused development evidence, not a new holdout. Smart Tagging fusion was not qualified externally; approximate tag windows cannot safely become hard D intervals. Full rows/losses: [V6 results](experiments/V6_RESULTS.md).

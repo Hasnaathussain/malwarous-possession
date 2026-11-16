@@ -1,0 +1,16 @@
+{
+  "revision": "f8f2629ff1e0985f81d7e59d8413678514ee1530",
+  "sources": {
+    "DATA.md": {
+      "url": "https://raw.githubusercontent.com/metrica-sports/more-than-a-hack-2027/f8f2629ff1e0985f81d7e59d8413678514ee1530/DATA.md",
+      "sha256": "b70aaa434e96a559f501fe5c3d65dbda6fba25c0fbd80ebe897ef23254de8c24",
+      "bytes": 12465
+    },
+    "starter/load_smart_tagging.py": {
+      "url": "https://raw.githubusercontent.com/metrica-sports/more-than-a-hack-2027/f8f2629ff1e0985f81d7e59d8413678514ee1530/starter/load_smart_tagging.py",
+      "sha256": "cacfe90acf1deb37b3aa3e4666d6a9d5595c1766d59fe24c9150e1a1d51d0c64",
+      "bytes": 6092
+    }
+  },
+  "qualification": "not validated; no target payload read"
+}

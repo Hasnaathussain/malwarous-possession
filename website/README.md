@@ -59,3 +59,7 @@ set `ATLAS_QA_BROWSER` to another Chromium executable when needed. It uses its o
 headless profile, checks public-only data, and writes ignored QA screenshots.
 The production URL can replace the local URL. Python tests cover the public
 export gate, interval preservation and preview server boundaries.
+
+## Matchday interface
+
+Zoom and pan the timeline/minimap, inspect spells, highlight H/A/D/X, compare V1/V2 differences, and inspect uncalibrated observation evidence traces. Fullscreen has a clear browser fallback. Space toggles playback, arrows step frames and Shift+arrows seek team changes; ? opens help. Deep links accept match/half/frame and the previous replay/frame form. The synthetic lab adds a centered emission-radius control without changing the fitted model. Motion/hero playback honor reduced-motion preferences. Squad information is credited to malwarous.dev/team; football roles are metaphors and the open seat is a community invitation.

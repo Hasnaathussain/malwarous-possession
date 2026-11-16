@@ -1,3 +1,5 @@
+import { mountMatchday, renderBenchmarkChart } from "./matchday.js";
+let matchday;
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
@@ -393,6 +395,7 @@ function buildTimeline() {
   els.referenceReading.hidden = !els.referenceToggle.checked;
   els.referenceToggle.disabled = !Array.isArray(currentData?.truth);
   updateTimelineMarkers();
+  matchday?.sequence();
 }
 
 function hexRgba(hex, alpha) {
@@ -615,6 +618,7 @@ function drawPitch(ctx, width, height, options = {}) {
 function resizeCanvas() {
   if (!els.pitchCanvas || !pitchCtx) return;
   const rect = els.pitchCanvas.getBoundingClientRect();
+  if (rect.width < 4 || rect.height < 4) return; // Hidden/fullscreen-transition layout has no drawable field.
   const width = Math.max(1, Math.floor(rect.width));
   const height = Math.max(1, Math.floor(rect.height));
   const dpr = Math.min(3, Math.max(1, window.devicePixelRatio || 1));
@@ -646,6 +650,7 @@ function updateFrameReadouts(syncVideo = false) {
   updateTimelineMarkers();
   resizeCanvas();
   if (syncVideo) seekSyntheticVideo();
+  matchday?.frame();
 }
 
 function updateFrame(frame, syncVideo = true) {
@@ -786,7 +791,7 @@ function updateSequenceCopy() {
   const cadence = Number.isFinite(displayHz) && displayHz > 0
     ? `Display cadence ${displayHz.toFixed(2)} Hz${sourceHz > displayHz + .01 ? ` · source ${sourceHz.toFixed(2)} Hz` : ""}.`
     : "Display cadence reported in the replay record.";
-  els.fieldCaption.textContent = `${sequenceLabel(currentMeta)} · ${cadence}`;
+  els.fieldCaption.textContent = `${sequenceLabel(currentMeta)} · ${cadence} ${currentMeta.kind === "synthetic_demo" ? "Synthetic fixture." : "Licensed external · Bassek et al., CC BY 4.0."}`;
   if (currentMeta.kind === "synthetic_demo") {
     els.replayScope.textContent = "Synthetic software fixture. Labels are authored test values, not outputs from the trained model; benchmark cells remain null.";
     els.provenanceText.textContent = "Synthetic positions and labels are software fixtures. They do not represent a match or a trained-model result.";
@@ -804,6 +809,7 @@ async function loadSequence(sequence) {
   const loadToken = ++loadSequenceToken;
   stopPlayback();
   setReplayControls(false);
+  $("#retryLoad").hidden = true;
   currentMeta = sequence;
   currentData = null;
   els.videoPanel.hidden = sequence.kind !== "synthetic_demo";
@@ -864,6 +870,7 @@ async function loadSequence(sequence) {
     els.sequenceTitle.textContent = sequence.title || sequenceLabel(sequence);
     setReplayControls(false);
     setTone(`Could not load ${sequenceLabel(sequence)}. Check that the public replay files are present.`, "error");
+    $("#retryLoad").hidden = false;
     console.error("Replay load failed", error);
     resizeCanvas();
   }
@@ -878,6 +885,7 @@ function renderBenchmarks() {
   const rows = Array.isArray(benchmarkData.rows) ? benchmarkData.rows : [];
   const filter = els.scenarioFilter.value || "all";
   const visibleRows = filter === "all" ? rows : rows.filter((row) => row.scenario === filter);
+  renderBenchmarkChart(visibleRows);
   els.benchmarkRows.replaceChildren();
   if (!visibleRows.length) {
     const tr = document.createElement("tr");
@@ -949,7 +957,8 @@ async function loadPublicIndex() {
     if (!Array.isArray(indexData.sequences) || !indexData.sequences.length) throw new Error("Replay index is empty");
     sequences = indexData.sequences;
     sequenceById = new Map(sequences.map((sequence) => [sequence.id, sequence]));
-    const requested = new URLSearchParams(location.search).get("replay");
+    const params = new URLSearchParams(location.search);
+    const requested = params.get("replay") || sequences.find(s => s.match_id === params.get("match") && String(s.half) === params.get("half"))?.id;
     const requestedFrame = new URLSearchParams(location.search).get("frame");
     populateMatches(requested || indexData.default_sequence);
     els.scenarioFilter.disabled = true;
@@ -966,6 +975,7 @@ async function loadPublicIndex() {
     els.matchSelect.disabled = true;
     els.halfSelect.disabled = true;
     setTone("Could not load the approved public replay index. Serve the website folder with its replay files.", "error");
+    $("#retryLoad").hidden = false;
     console.error("Public replay index failed", error);
     resizeCanvas();
   }
@@ -975,6 +985,8 @@ function currentShareUrl() {
   const url = new URL(window.location.href);
   url.searchParams.set("replay", currentMeta.id);
   url.searchParams.set("frame", String(Math.round(currentFrame)));
+  url.searchParams.set("match", currentMeta.match_id || "synthetic");
+  url.searchParams.set("half", String(currentMeta.half || 0));
   url.hash = "replay";
   return url.toString();
 }
@@ -1111,6 +1123,7 @@ async function mountSandboxOnce() {
   }
 }
 
+matchday = mountMatchday({getData: () => currentData, getFrame: () => currentFrame, setFrame: updateFrame, seekChange, play: togglePlayback, retry: loadPublicIndex});
 bindEvents();
 resizeCanvas();
 mountSandboxOnce();

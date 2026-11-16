@@ -64,3 +64,13 @@ test('invalid evidence, costs and state paths fail instead of producing a mislea
   assert.throws(() => scorePath([[0, 1, 2]], ['X'], 10));
   assert.throws(() => scorePath([[0, 1, 2]], [], 10));
 });
+
+const {smoothEvidence} = await import('../website/sandbox.js');
+test('illustrative emission smoothing truncates edges, preserves radius zero and validates radius', () => {
+ const source=[[0,6,3],[6,0,3],[0,6,3]];
+ assert.deepEqual(smoothEvidence(source,0),source);
+ assert.deepEqual(smoothEvidence(source,1),[[3,3,3],[2,4,3],[3,3,3]]);
+ assert.deepEqual(source,[[0,6,3],[6,0,3],[0,6,3]]);
+ assert.throws(()=>smoothEvidence(source,-1));
+ assert.throws(()=>smoothEvidence(source,.5));
+});
