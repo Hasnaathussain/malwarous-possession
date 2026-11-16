@@ -46,7 +46,7 @@ research workspace retains the complete protocols, reports and unsuccessful code
 inactive experimental versions are omitted from this concise source edition.
 
 Short spells, provider-label semantics, synthetic dropout realism and transfer to
-automatic competition tracking remain limitations. No target score, rank,
+automatic competition tracking remain limitations. No full-match target score, rank,
 calibrated confidence or real-time inference claim is established.
 
 ## Source and reproduction
@@ -69,3 +69,9 @@ describe whichever complete pipeline the team ultimately chooses.
 ## Final registered decoder audit
 
 V6 re-examined already consumed p10/p25/p50 predictions on all18 external rows. Mean spellF1: p10 0.4809519, p25 0.4721337, p50 0.4437200. Mean transition F1@25: 0.5154486, 0.5076051, 0.4928354. Both alternatives failed the preregistered conjunctive gate; the frozen candidate and final CSV are unchanged. This is reused development evidence, not a new holdout. Smart Tagging fusion was not qualified externally; approximate tag windows cannot safely become hard D intervals. Full rows/losses: [V6 results](experiments/V6_RESULTS.md).
+
+## Final correctness review
+
+The final pipeline check was registered at commit `1ed2888` and completed once with the unmodified official public evaluator and 1000 bootstrap draws. Full output stays local; it was not a promotion/acceptance gate. The CSV is unchanged. Synthetic coordinate/reflection checks passed. See [final review](FINAL_REVIEW.md) and [implemented possession semantics](POSSESSION_RULES.md). Random-dropout views do not reproduce visibility conditioned on duels, crowding or camera motion. Eighteen scenario rows comprise six reused match clusters.
+
+Exact reproduction is established for the reviewed Windows release environment and Linux/WSL CPython 3.11.9 with requirements.lock; no macOS result is claimed.

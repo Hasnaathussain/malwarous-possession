@@ -53,3 +53,5 @@ From the root, create a Python3.11.9 environment and install `requirements.lock`
 `docs/Malwarous.html` and `scripts/build_technical_pdf.mjs` build the designed technical PDF; `docs/figures/` contains public-safe showcase screenshots only. `docs/CONTINUATION_LEDGER.md` records final gates, reproduction and checklist status. The source manifest covers all committed files except itself.
 
 Atlas presentation sources: [visual identity](../website/DESIGN.md), original SVG schematics and local OFL fonts under website/media/. [Monitoring guide](ATLAS_MONITORING.md) covers optional Analytics/Speed Insights and native CDN/build visibility. The website redesign does not change inference, replays, CSV or PDF.
+
+Final critique review and upload/freeze status: [FINAL_REVIEW.md](FINAL_REVIEW.md). [POSSESSION_RULES.md](POSSESSION_RULES.md) distinguishes source-label mapping, intended challenge rules, and implementation limits. The annotated final-packet tag identifies the submitted source snapshot.

@@ -90,4 +90,8 @@ inventory covers both. This publication does not complete the organizer form.
 
 ## Final continuation
 
-The frozen candidate/CSV remain unchanged after registered V6 diagnostics. Linux/WSL CPython3.11.9 with requirements.lock reproduced the published CSV byte for byte, then reproduced it independently again. The public-GT diagnostic request was not used for model tuning/validation. See CONTINUATION_LEDGER.md for all gates, cleanup, provenance, PDF source and final submission checklist. Newly committed preview PNGs are accepted by the integrity helper only at four exact paths and SHA256 values; arbitrary image binaries remain rejected.
+The frozen candidate/CSV remain unchanged after registered V6 diagnostics. Linux/WSL CPython3.11.9 with requirements.lock reproduced the published CSV byte for byte, then reproduced it independently again. The public-GT diagnostic request was not used for model tuning/validation. See CONTINUATION_LEDGER.md for all gates, cleanup, provenance, PDF source and final submission checklist. Newly committed preview PNGs are accepted by the integrity helper only at named exact paths and SHA256 values; arbitrary image binaries remain rejected.
+
+## Final critique and freeze check
+
+The exact CSV passed the unchanged official validator. The registered one-time official public evaluator completed locally with bootstrap1000, under a disabled-network child; output remained private and no score entered selection. Before/after CSV SHA256 was identical. Three new synthetic coordinate-convention checks passed. PR2 was already closed and no open PRs were returned by GitHub at review. Final packet identity is the annotated tag `malwarous-initial-2026-11-17`, not the moving main branch. The updated technical document has a dedicated possession-rule/provider-gap section. See FINAL_REVIEW.md for release identity and remaining form actions.

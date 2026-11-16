@@ -45,7 +45,7 @@ No match ID, player identity or absolute match-time feature enters the model. A 
 
 ## External development evidence
 
-**Six reused external matches, three whole-match excluded folds, three observation scenarios, 18 paired rows. These are selection-conditioned development measurements, not independent validation or competition scores.**
+**Six reused external matches, three whole-match excluded folds, three observation scenarios, 18 paired rows. These are selection-conditioned development measurements, not independent validation or competition scores. The scenarios on each match are correlated; uncertainty has six match clusters.**
 
 | Method | Mean spellF1 | Mean macroF1 |
 |---|---:|---:|
@@ -80,7 +80,7 @@ MTAH_DATA_DIR='/path/to/authorized/bundle' .venv/bin/python -m malwarous.v2.safe
 MTAH_DATA_DIR='/path/to/authorized/bundle' .venv/bin/python -m malwarous.v2.safe_runner v2_target_reproduce
 ```
 
-Check each command succeeds before advancing. No training/finalizer step is needed. The output is `artifacts_private/v2/Malwarous-v2.csv`; the second command independently regenerates it and requires byte identity. Linux/WSL CPython 3.11.9 with the lock reproduced the published CSV byte for byte, as did the Windows release environment. This is reproduction evidence, not accuracy evidence.
+Check each command succeeds before advancing. No training/finalizer step is needed. The output is `artifacts_private/v2/Malwarous-v2.csv`; the second command independently regenerates it and requires byte identity. Linux/WSL CPython 3.11.9 with the lock reproduced the published CSV byte for byte, as did the Windows release environment. This is reproduction evidence, not accuracy evidence. macOS and arbitrary environments were not byte-verified.
 
 <details>
 <summary>Windows PowerShell, local demos and verification</summary>
@@ -106,7 +106,7 @@ Source integrity: `python -B scripts/verify_repository.py`. Tests: install `requ
 | Tactical ATD and its metadata | Used: positions, anonymous team membership, pitch geometry |
 | Official match constants | Used: frame count and separate half blocks |
 | External DFL/Sportec tracking + provider labels | Used: fitting and grouped development; CC BY 4.0 |
-| Smart Tagging | Not integrated. Public loader reviewed; restart windows are approximate, not exact D spans. External fusion qualification failed. |
+| Smart Tagging | Not integrated. Public loader reviewed; restart windows are approximate, not exact D spans. No adequately qualified external fusion evaluation was completed. |
 | Homography | Not integrated: the selected method consumes already projected pitch coordinates. |
 | Broadcast video / ATD | Not integrated: separate timeline; no validated automatic alignment or fusion. |
 | Tactical video | Not an inference input to selected V2. Human local viewing does not supply labels. |
@@ -135,3 +135,5 @@ Validate the exact upload with `python evaluation/validate_submission.py submiss
 ## Attribution
 
 Code retains the organizer MIT notice in [LICENSE](LICENSE). External data and derived weights/results credit **Manuel Bassek, Robert Rein, Hendrik Weber and Daniel Memmert**, *An integrated dataset of spatiotemporal and event data in elite soccer*, [Figshare v1](https://doi.org/10.6084/m9.figshare.28196177.v1), CC BY 4.0; transformations are described in [MODEL_ATTRIBUTION.md](MODEL_ATTRIBUTION.md) and [public replay provenance](website/PUBLIC_DATA.md). Authors do not endorse this model. Competition assets have separate restricted terms and are excluded.
+
+Final semantics and freeze: [possession rules](docs/POSSESSION_RULES.md), [critique review and upload checklist](docs/FINAL_REVIEW.md). A pre-registered, one-time public pipeline check completed locally without changing or selecting the candidate. Final packet tag: `malwarous-initial-2026-11-17`; this is not organizer submission.

@@ -79,4 +79,6 @@ The interface supports synchronized play/seek/speed, both prediction timelines, 
 
 ## Final release clarification
 
-The selected candidate remains `context_p10_r0`; V6 transition diagnostics did not promote p25 or p50. See `experiments/V6_RESULTS.md` for all18 matched rows per candidate and losses. Smart Tagging/homography/broadcast are not integrated in this selected pipeline. Linux/WSL CPython3.11.9 with the pinned environment reproduced the published CSV exactly. The final CSV/PDF in `submission/` are explicitly team-published outputs; raw assets and private viewers remain excluded.
+The selected candidate remains `context_p10_r0`; V6 transition diagnostics did not promote p25 or p50. See `experiments/V6_RESULTS.md` for all18 matched rows per candidate and losses. Smart Tagging/homography/broadcast are not integrated in this selected pipeline. Windows and Linux/WSL CPython3.11.9 with the pinned environment reproduced the published CSV exactly. macOS and arbitrary platforms were not verified. The final CSV/PDF in `submission/` are explicitly team-published outputs; raw assets and private viewers remain excluded.
+
+See [possession semantics](POSSESSION_RULES.md) for loose balls, contact, stoppages and restarts. The frozen one-time public pipeline check in [FINAL_REVIEW.md](FINAL_REVIEW.md) did not tune, select, reject or modify this candidate.

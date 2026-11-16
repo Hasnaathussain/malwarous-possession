@@ -21,16 +21,16 @@
       "sha256": "0efbc9f27c311f73c2d69ad77cd035a495a6345ff14e903c1c3cf2c356233bdb"
     },
     {
-      "bytes": 1685,
+      "bytes": 2012,
       "classification": "source_or_external_report",
       "path": "MODEL_ATTRIBUTION.md",
-      "sha256": "200d70f8abd0794c492f8cd9030aea79276942a1ea903d02aa48ec78c9aaf7f2"
+      "sha256": "586bad054890cfcc1b2976b55f893b323db45e90e33fe0450fe72e4cf697ef1f"
     },
     {
-      "bytes": 8562,
+      "bytes": 9060,
       "classification": "source_or_external_report",
       "path": "README.md",
-      "sha256": "6542ed2ea5358f32b3f63a6e43f2c9a8f099f11b47f78a704f8b045fab79fc44"
+      "sha256": "6c09ffb5abe3dc3685dc02d6b6ac34b3d858482b4ee46cff32ea7461fe42f089"
     },
     {
       "bytes": 2943,
@@ -75,10 +75,10 @@
       "sha256": "ae720a8c70bfdc4394bba1dc344a6bfa8823758883cd346ee59b34f82c9354b5"
     },
     {
-      "bytes": 10029,
+      "bytes": 10384,
       "classification": "source_or_external_report",
       "path": "docs/CONTINUATION_LEDGER.md",
-      "sha256": "b4170a2e0912e306d8dba0a8b5976bfae6ebd3617cd386ab6da3e9af895a6f2d"
+      "sha256": "da21461372f0b0c2b76b8d2debbcda34209c54711aca7b15d32e01c0d37b096b"
     },
     {
       "bytes": 2575,
@@ -87,10 +87,16 @@
       "sha256": "fb57dee4992fb1848e83693e17a33a3d3e1ed828fe55be0ed602c5cff928e776"
     },
     {
-      "bytes": 4451,
+      "bytes": 6441,
+      "classification": "source_or_external_report",
+      "path": "docs/FINAL_REVIEW.md",
+      "sha256": "a3475942866f543f91c8518bf4c3c0d63ffa73287a0ec4d98b0b0f28885ce17e"
+    },
+    {
+      "bytes": 5192,
       "classification": "source_or_external_report",
       "path": "docs/FINAL_SUMMARY.md",
-      "sha256": "50cf98630e18e57263b01a77c64986f5853c5aca50bde7c1fbc6742f1a92cb34"
+      "sha256": "4169e8f4d6066e96852835a9c2125bbe6bcd6ffdcf79feedd4508cac03a7565c"
     },
     {
       "bytes": 7255,
@@ -99,22 +105,28 @@
       "sha256": "38b0c3be7a1bda9b0eaec905aa741b48f79c4364d8f0c199a175c3c622a7e02d"
     },
     {
-      "bytes": 13582,
+      "bytes": 16915,
       "classification": "source_or_external_report",
       "path": "docs/Malwarous.html",
-      "sha256": "8dd00b069a2ec5da491d7eae3790e9f00080545db308510b6c74ab98317c2bc8"
+      "sha256": "b65881f0d7faa6325e1f6341f0372508b9ed0b92f0a49c5d82bfc3962c68b47a"
     },
     {
-      "bytes": 6459,
+      "bytes": 3248,
+      "classification": "source_or_external_report",
+      "path": "docs/POSSESSION_RULES.md",
+      "sha256": "dd6ba203d471f061af5cb667f3f516192cacb5bfffdb18265f5129edb46abe9b"
+    },
+    {
+      "bytes": 7155,
       "classification": "source_or_external_report",
       "path": "docs/RELEASE_CHECKS.md",
-      "sha256": "f3638a342516a17ff69f34f61d620e0a1c60425cc51a09c7025c058f8112f964"
+      "sha256": "67d438a1c8a201e9086d57770e28376bdb656e39929f830ebc25588982bf0a95"
     },
     {
-      "bytes": 4746,
+      "bytes": 5036,
       "classification": "source_or_external_report",
       "path": "docs/REPOSITORY_MAP.md",
-      "sha256": "60e05f785d69a3de0e752088765d3f20986f130f34c5474392c18d7d18c10cca"
+      "sha256": "81a1d1954cdec902d006606968e6a9aa1dea08123895b3e9a4fc5da52034f77b"
     },
     {
       "bytes": 7003,
@@ -129,22 +141,22 @@
       "sha256": "c9ad5f4ea0b1e5d0abc14b67c037b590554be33609dd7f505e677115531bec00"
     },
     {
-      "bytes": 7491,
+      "bytes": 9495,
       "classification": "source_or_external_report",
       "path": "docs/TECHNICAL_NOTE.md",
-      "sha256": "86e0e003442600b42739afa193ed97fd6c1397749012264c64113cb4a6308024"
+      "sha256": "d92223dde549fc53e3cf388cfb5265da72ae3752461caae7feb4f5d73beffe66"
     },
     {
-      "bytes": 8756,
+      "bytes": 9051,
       "classification": "source_or_external_report",
       "path": "docs/V2_GUIDE.md",
-      "sha256": "27f0f52442903135f4e731e476bec759fb65f7cc3f8ebd4f995c5da00784a569"
+      "sha256": "53bacefe83eecf72587fb45b754c19f3cff958f475b9dcbe80eeef3d060ead0c"
     },
     {
-      "bytes": 5578,
+      "bytes": 6113,
       "classification": "source_or_external_report",
       "path": "docs/V2_PROVENANCE.md",
-      "sha256": "c5aedfe744c8f82620d9f1b737566a53fcced6e98e686dfb430ed7b5dbe6f330"
+      "sha256": "7a5c4cd1b5b867600362b6a035b9d7b85192fd8720ca6a1480544958cb3b3e8c"
     },
     {
       "bytes": 7587,
@@ -468,7 +480,7 @@
       "bytes": 3549,
       "classification": "source_or_external_report",
       "path": "scripts/build_technical_pdf.mjs",
-      "sha256": "e9e7d7dd35fa1bc44c610598dfa10201a024d4e795483a7eaed465e2229086a0"
+      "sha256": "706652f248b43e9ca7b32cc4a0e152c7ec2e3ab98e5e01c9a7fbce3a44d48114"
     },
     {
       "bytes": 18670,
@@ -561,10 +573,16 @@
       "sha256": "2fa5c020221e49eb793cd6d59baa39e7f59e3e6a9bb0ed5a329d5331c8067824"
     },
     {
-      "bytes": 182218,
+      "bytes": 199852,
       "classification": "team_requested_final_submission",
       "path": "submission/Malwarous.pdf",
-      "sha256": "f10829c7d3adbed2d88bf642e6df3de31a45ddc2add8e5a5351357b6e3717a59"
+      "sha256": "d9beacd43587b3eb548bd6ca922c416d60aa9619480baa7ee57583b05f24f251"
+    },
+    {
+      "bytes": 3916,
+      "classification": "source_or_external_report",
+      "path": "tests/test_coordinate_conventions.py",
+      "sha256": "e45b57b0d3c27662346317e1cbaade4a0b6550ce7e2404a7adbf491be9bf00ab"
     },
     {
       "bytes": 1739,

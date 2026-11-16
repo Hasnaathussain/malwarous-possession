@@ -19,3 +19,5 @@ and the CC BY 4.0 licence link must accompany redistribution of the derived mode
 No endorsement by the dataset authors is implied. Repository code remains under MIT.
 
 Public showcase figures in docs/figures reuse licensed external Atlas data (CC BY4.0, Bassek/Rein/Weber/Memmert; see website/PUBLIC_DATA.md) or the explicitly labelled synthetic decoder fixture. The team crest, formation and jersey silhouettes are original illustrative artwork; professional team details are sourced in docs/TEAM_SOURCES.md. The designed PDF source is docs/Malwarous.html. No target-match imagery is included.
+
+External supervision is the source provider's BallStatus/BallPossession on the six named matches, not team hand annotations. Its workflow and equivalence to target control/stoppage semantics were not independently verified; see docs/POSSESSION_RULES.md. The final public correctness check did not enter training or selection.

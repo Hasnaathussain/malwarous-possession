@@ -31,8 +31,8 @@ try {
   for(let i=0;i<80;i++){const r=await call('Runtime.evaluate',{expression:"document.readyState==='complete' && [...document.images].every(i=>i.complete&&i.naturalWidth>0)",returnByValue:true});if(r.result.value){ready=true;break}await pause(100)}
   assert.ok(ready,'Document or its approved figures failed to load');
   const sizes=await call('Runtime.evaluate',{expression:"[...document.querySelectorAll('.page')].map(p=>({height:p.clientHeight,content:p.scrollHeight,footer:p.querySelector('.footer').getBoundingClientRect().top,bodyBottom:Math.max(...[...p.children].filter(e=>!e.classList.contains('footer')).map(e=>e.getBoundingClientRect().bottom))}))",returnByValue:true});
-  assert.equal(sizes.result.value.length,4);assert.ok(sizes.result.value.every(p=>p.content<=p.height+1 && p.bodyBottom < p.footer-8),JSON.stringify(sizes.result.value));
+  assert.equal(sizes.result.value.length,5);assert.ok(sizes.result.value.every(p=>p.content<=p.height+1 && p.bodyBottom < p.footer-8),JSON.stringify(sizes.result.value));
   const pdf=await call('Page.printToPDF',{printBackground:true,preferCSSPageSize:true,displayHeaderFooter:false,generateTaggedPDF:true});
   await writeFile(path.join(root,'submission/Malwarous.pdf'),Buffer.from(pdf.data,'base64'));
-  console.log(JSON.stringify({status:'built',source:'docs/Malwarous.html',output:'submission/Malwarous.pdf',pages:4,overflow:'none',rendering:'Chromium; font/renderer versions can affect PDF bytes'}));
+  console.log(JSON.stringify({status:'built',source:'docs/Malwarous.html',output:'submission/Malwarous.pdf',pages:5,overflow:'none',rendering:'Chromium; font/renderer versions can affect PDF bytes'}));
 } finally {socket?.close();browser.kill();}

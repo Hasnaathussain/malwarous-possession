@@ -1,5 +1,7 @@
 # Final continuation ledger - 16 November 2026
 
+> Latest update: the final frozen public pipeline check completed on 16 November 2026 without a score-based decision. The five-page PDF now includes a provider/target possession-rules comparison. Final packet tag: malwarous-initial-2026-11-17. See FINAL_REVIEW.md for the current status; earlier no-public-check statements below describe earlier stages.
+
 ## Outcome and evidence boundary
 
 Final candidate remains **context_p10_r0**, penalty10/radius0,65 observable features. No accuracy improvement was demonstrated by this continuation. No target score, rank, top-three claim or full-match score range is justified.

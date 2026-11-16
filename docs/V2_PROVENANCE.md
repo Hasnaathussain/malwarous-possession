@@ -8,7 +8,7 @@ V1 remains preserved in the internal reviewed snapshot at commit `42f487187dbd9f
 
 The three whole-match folds contain predictions excluded from fitting on each particular match. Candidate selection uses those pooled development results. None of these matches is newly blind. J03WMX is a previously consumed v1 confidence audit, not a new v2 test. No fresh independent dense possession source qualified; see `experiments/V2_DATA_REVIEW.md`.
 
-Competition tactical/broadcast recordings and tracking stay local under their separate restricted terms. V2 training never reads them. Frozen target inference uses only the tactical observables, documented game constants and external-only fitted artifact. It does not read target truth/public labels, compute a target score, create human annotations or use target predictions to select a model. The tactical video is available only through a local explicit media allowlist for human inspection. Broadcast has a different timeline; no synchronization is asserted without a validated mapping.
+Competition tactical/broadcast recordings and tracking stay local under their separate restricted terms. V2 training never reads them. Frozen target inference uses only the tactical observables, documented game constants and external-only fitted artifact. The inference path does not read target truth/public labels, compute a score, create human annotations or use target predictions to select a model. A separate, pre-registered final pipeline check later ran the unmodified official scorer once on public labels, locally, with no score-based decision; no check report or labels enter this repository. The tactical video is available only through a local explicit media allowlist for human inspection. Broadcast has a different timeline; no synchronization is asserted without a validated mapping.
 
 ## Method, code and reproducibility
 
@@ -26,4 +26,6 @@ The external viewer uses only licensed DFL/Sportec positions, provider labels an
 
 ## Final release clarification
 
-The selected candidate remains `context_p10_r0`; V6 transition diagnostics did not promote p25 or p50. See `experiments/V6_RESULTS.md` for all18 matched rows per candidate and losses. Smart Tagging/homography/broadcast are not integrated in this selected pipeline. Linux/WSL CPython3.11.9 with the pinned environment reproduced the published CSV exactly. The final CSV/PDF in `submission/` are explicitly team-published outputs; raw assets and private viewers remain excluded.
+The selected candidate remains `context_p10_r0`; V6 transition diagnostics did not promote p25 or p50. See `experiments/V6_RESULTS.md` for all18 matched rows per candidate and losses. Smart Tagging/homography/broadcast are not integrated in this selected pipeline. Windows and Linux/WSL CPython3.11.9 with the pinned environment reproduced the published CSV exactly; macOS was not verified. The final CSV/PDF in `submission/` are explicitly team-published outputs; raw assets and private viewers remain excluded.
+
+Implemented possession semantics are compared with the target definition in [POSSESSION_RULES.md](POSSESSION_RULES.md). We use provider-supplied supervision and do not claim independent verification of the provider annotation workflow or semantic identity with corrected Metrica tracking.
