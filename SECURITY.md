@@ -37,6 +37,12 @@ The team explicitly requested publication of the final `submission/Malwarous.csv
 and `submission/Malwarous.pdf`. This exact packet is the exception to prediction
 exclusion; it does not include raw video, tracking or private viewer material.
 
-## Optional deployment analytics
+## Optional deployment monitoring
 
-A concurrent team-merged Vercel Analytics PR is preserved through the official plain-HTML script integration. It is isolated from replay startup, disabled on loopback and automated browsers, and removes replay query/hash parameters from page-view URLs. If deployment analytics is disabled, replay still works. No match coordinates, predictions, model inputs or form data are passed to analytics. The site keeps its self-origin CSP; no npm package installation is needed.
+Vercel Web Analytics and Speed Insights use separate, optional same-origin
+plain-HTML scripts. Both strip URL query/hash parameters, skip local and automated
+browsers, and cannot prevent replay startup if unavailable. No custom events,
+coordinates, predictions, model inputs or form data are supplied to telemetry.
+The self-origin CSP remains intact. Fonts are self-hosted under included OFL
+licenses and individually hash-pinned. See docs/ATLAS_MONITORING.md for platform
+request/build visibility and static-site tracing limits.

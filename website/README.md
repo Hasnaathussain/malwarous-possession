@@ -60,10 +60,19 @@ headless profile, checks public-only data, and writes ignored QA screenshots.
 The production URL can replace the local URL. Python tests cover the public
 export gate, interval preservation and preview server boundaries.
 
-## Matchday interface
+## Evidence lab interface
 
-Zoom and pan the timeline/minimap, inspect spells, highlight H/A/D/X, compare V1/V2 differences, and inspect uncalibrated observation evidence traces. Fullscreen has a clear browser fallback. Space toggles playback, arrows step frames and Shift+arrows seek team changes; ? opens help. Deep links accept match/half/frame and the previous replay/frame form. The synthetic lab adds a centered emission-radius control without changing the fitted model. Motion/hero playback honor reduced-motion preferences. Squad information is credited to malwarous.dev/team; football roles are metaphors and the open seat is a community invitation.
+Zoom and pan the timeline/minimap, inspect spells, highlight H/A/D/X, compare V1/V2 differences, and inspect uncalibrated observation evidence traces. Fullscreen has a clear browser fallback. Space toggles playback, arrows step frames and Shift+arrows seek team changes; ? opens help. Deep links accept match/half/frame and the previous replay/frame form. The synthetic lab adds a centered emission-radius control without changing the fitted model. Motion/hero playback honor reduced-motion preferences. Team information is credited to malwarous.dev/team; the collaboration map is illustrative and the open seat is a separate community invitation.
 
-## Optional deployment analytics
+## Design and monitoring
 
-A concurrent team-merged Vercel Analytics PR is preserved through the official plain-HTML script integration. It is isolated from replay startup, disabled on loopback and automated browsers, and removes replay query/hash parameters from page-view URLs. If deployment analytics is disabled, replay still works. No match coordinates, predictions, model inputs or form data are passed to analytics. The site keeps its self-origin CSP; no npm package installation is needed.
+The charcoal/lavender/amber identity follows the public Malwarous brand, with
+original signal schematics, local OFL fonts, a synthetic video preview, scroll
+orientation and reduced-motion-aware diagram motion. Hero video pauses offscreen
+and in background tabs. See [design sources](DESIGN.md).
+
+Optional native Web Analytics and Speed Insights load independently of replay.
+Both remove query/hash parameters; localhost and automated QA do not send events.
+CDN requests, traffic and build logs use Vercel's existing platform monitoring.
+This static site has no inference service or server span traces.
+See [monitoring coverage and setup](../docs/ATLAS_MONITORING.md).

@@ -1,5 +1,5 @@
 const STATE_NAMES = Object.freeze(["H", "A", "D"]);
-const STATE_COLORS = Object.freeze({ H: "#1d5948", A: "#bd6846", D: "#c8bea7" });
+const STATE_COLORS = Object.freeze({ H: "#9d90ff", A: "#f2a93b", D: "#8b8a93" });
 const PRESETS = Object.freeze(["short-regain", "occlusion", "stoppage"]);
 const BIN_COUNT = 36;
 const BIN_SECONDS = 0.5;
@@ -8,20 +8,20 @@ let nextInstanceId = 0;
 
 const LAB_STYLES = `
 .lab-shell {
-  --lab-paper: #f4f0e5;
-  --lab-paper-deep: #ebe4d2;
-  --lab-ink: #17342c;
-  --lab-muted: #58645b;
-  --lab-rule: #c8c4b4;
-  --lab-pine: #1d5948;
-  --lab-copper: #bd6846;
-  --lab-chartreuse: #d5dc72;
-  --lab-dead: #c8bea7;
+  --lab-paper: #111116;
+  --lab-paper-deep: #19191f;
+  --lab-ink: #e7e5df;
+  --lab-muted: #aaa6b5;
+  --lab-rule: #34313f;
+  --lab-pine: #9d90ff;
+  --lab-copper: #f2a93b;
+  --lab-chartreuse: #9d90ff;
+  --lab-dead: #8b8a93;
   color: var(--lab-ink);
   background: var(--lab-paper);
   border: 1px solid var(--lab-rule);
   padding: clamp(1.15rem, 3vw, 2.4rem);
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
   line-height: 1.5;
   isolation: isolate;
 }
@@ -38,9 +38,9 @@ const LAB_STYLES = `
 .lab-shell .lab-heading {
   max-width: 16ch;
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Archivo", "Arial Black", sans-serif;
   font-size: clamp(2rem, 4.6vw, 3.4rem);
-  font-weight: 500;
+  font-weight: 800;
   letter-spacing: -.045em;
   line-height: .98;
 }
@@ -141,7 +141,7 @@ const LAB_STYLES = `
 .lab-shell .lab-metric-value {
   display: block;
   margin-top: .15rem;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Archivo", "Arial Black", sans-serif;
   font-size: clamp(1.25rem, 2.4vw, 1.7rem);
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
@@ -149,9 +149,9 @@ const LAB_STYLES = `
 .lab-shell .lab-objective { margin-top: 1.1rem; }
 .lab-shell .lab-subheading {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Archivo", "Arial Black", sans-serif;
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 800;
 }
 .lab-shell .lab-formula { margin: .35rem 0 .7rem; color: var(--lab-muted); font-size: .82rem; }
 .lab-shell .lab-objective-table,
@@ -182,12 +182,12 @@ const LAB_STYLES = `
 .lab-shell .lab-track-caption { grid-column: 2; margin: -.55rem 0 0; color: var(--lab-muted); font-size: .72rem; }
 .lab-shell .lab-state-legend { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: .8rem 0 0 7.9rem; color: var(--lab-muted); font-size: .77rem; }
 .lab-shell .lab-legend-item { display: inline-flex; align-items: center; gap: .4rem; }
-.lab-shell .lab-swatch { display: inline-block; width: .7rem; height: .7rem; border: 1px solid rgba(23,52,44,.3); }
+.lab-shell .lab-swatch { display: inline-block; width: .7rem; height: .7rem; border: 1px solid rgba(231,229,223,.3); }
 .lab-shell .lab-explanation {
   max-width: 75ch;
   margin: 1rem 0 0;
   padding: .8rem 1rem;
-  background: rgba(213, 220, 114, .25);
+  background: rgba(157, 144, 255, .18);
   color: var(--lab-ink);
   font-size: .86rem;
 }
@@ -434,7 +434,7 @@ function buildTimeline(path, label) {
       height: 30,
       rx: 1,
       fill: STATE_COLORS[path[i]],
-      stroke: "#f4f0e5",
+      stroke: "#111116",
       "stroke-width": 1,
     }));
   }
@@ -446,7 +446,7 @@ function buildTimeline(path, label) {
         const text = makeSvgElement("text", {
           x: runStart * 26 + runWidth / 2,
           y: 16,
-          fill: path[runStart] === "D" ? "#17342c" : "#fffdf5",
+          fill: "#0e0e11",
           "font-family": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
           "font-size": 11,
           "font-weight": 700,
@@ -488,14 +488,14 @@ function buildEvidenceChart(evidence, preset, regainLength) {
   const x2 = left + ((window.end - 1) / evidence.length) * plotWidth;
   svg.appendChild(makeSvgElement("rect", {
     x: x1, y: top, width: Math.max(1, x2 - x1), height: plotHeight,
-    fill: "#d5dc72", opacity: 0.28,
+    fill: "#9d90ff", opacity: 0.28,
   }));
   for (const tick of [-16, -8, 0, 8, 16, 24]) {
     const y = yFor(tick);
-    svg.appendChild(makeSvgElement("line", { x1: left, x2: right, y1: y, y2: y, stroke: "#c8c4b4", "stroke-width": 1 }));
+    svg.appendChild(makeSvgElement("line", { x1: left, x2: right, y1: y, y2: y, stroke: "#34313f", "stroke-width": 1 }));
     const label = makeSvgElement("text", {
       x: left - 8, y: y + 3,
-      fill: "#58645b", "font-size": 10, "text-anchor": "end",
+      fill: "#aaa6b5", "font-size": 10, "text-anchor": "end",
       "font-family": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
     });
     label.textContent = String(tick);
@@ -508,11 +508,11 @@ function buildEvidenceChart(evidence, preset, regainLength) {
       "stroke-linejoin": "round", "stroke-linecap": "round",
     }));
   }
-  const firstLabel = makeSvgElement("text", { x: left, y: height - 5, fill: "#58645b", "font-size": 10 });
+  const firstLabel = makeSvgElement("text", { x: left, y: height - 5, fill: "#aaa6b5", "font-size": 10 });
   firstLabel.textContent = "bin 1";
   svg.appendChild(firstLabel);
   const finalLabel = makeSvgElement("text", {
-    x: right, y: height - 5, fill: "#58645b", "font-size": 10, "text-anchor": "end",
+    x: right, y: height - 5, fill: "#aaa6b5", "font-size": 10, "text-anchor": "end",
   });
   finalLabel.textContent = `bin ${evidence.length}`;
   svg.appendChild(finalLabel);

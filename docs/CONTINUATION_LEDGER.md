@@ -71,3 +71,25 @@ Remote main acquired Vercel PR1 during this work. Its bare @vercel/analytics imp
 ## Independent documentation review
 
 A final read-only review corrected historical V1 recommendation wording, qualified V5 as the last training attempt before cache-only V6, and expanded the dependency table with direct test references. The selected config pins19 source files plus the report and fitted artifact (21 total), not21 source files. No model, CSV, PDF or website behavior changed in this documentation pass. Recursive ignored-cache cleanup was rejected by automatic approval review as blocked by policy; no bypass was attempted, and ignored local caches remain outside Git/deployment.
+# Atlas visual release — 16 November 2026
+
+Website-only continuation: original Malwarous cybersecurity styling, charcoal /
+lavender / amber, local OFL typography, signal schematics, responsive dark replay
+and decoder interfaces, and a community roster. The added progress indicator,
+pointer treatment and diagram motion respect reduced motion. Synthetic hero video
+pauses offscreen and in background tabs. No inference, replay-data, score, CSV,
+PDF or frozen-source bytes changed. Earlier figures remain the technical PDF's
+source material; the README's new hero captures the updated website.
+
+Native Web Analytics and Speed Insights are independent, optional scripts with
+query/hash redaction. Existing Vercel Analytics and basic Observability were
+confirmed active in the dashboard. Speed Insights was enabled; this release adds
+its missing browser client. No paid upgrades, custom events, artificial backend,
+log drain, or invented traces. Coverage: [ATLAS_MONITORING.md](ATLAS_MONITORING.md).
+
+Local verification: public browser workflow passed at 320 / 390 / 768 / 1366px,
+including replay controls, export, evidence, lab, intentional index-load failure
+and retry recovery, normal/reduced motion, offscreen video pause, and no unexpected
+cross-origin requests or runtime exceptions. The new monitoring VM suite checks
+redaction and independent failures. Source manifest and frozen dependency checks
+are refreshed for this presentation release.

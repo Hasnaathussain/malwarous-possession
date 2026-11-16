@@ -35,15 +35,15 @@ export function mountMatchday(api) {
   }
   function paintEvidence(range) {
     const ctx = canvas.getContext('2d'), width = canvas.width, fps = data.fps;
-    ctx.fillStyle = '#10232a'; ctx.fillRect(0, 0, width, 300);
-    const specs = [['team_log_evidence', 'Home − away · log ratio', '#d6e79d'], ['dead_log_evidence', 'Dead · log score', '#ee946d'], ['ball_support_4s', 'Ball support · fraction', '#b6cbd5']];
+    ctx.fillStyle = '#15151c'; ctx.fillRect(0, 0, width, 300);
+    const specs = [['team_log_evidence', 'Home − away · log ratio', '#9d90ff'], ['dead_log_evidence', 'Dead · log score', '#f2a93b'], ['ball_support_4s', 'Ball support · fraction', '#b5bbc9']];
     const samples = data.samples.filter(s => range[0] <= s.f && s.f < range[1]);
     specs.forEach(([key, label, color], row) => {
       const top = row * 100, finite = samples.map(s => s.e?.[key]).filter(v => typeof v === 'number' && Number.isFinite(v));
       const lo = key === 'ball_support_4s' ? 0 : Math.min(0, ...finite), hi = key === 'ball_support_4s' ? 1 : Math.max(1, ...finite);
-      ctx.font = '14px Arial'; ctx.fillStyle = '#d4dfd7'; ctx.fillText(label, 12, top + 18);
-      ctx.font = '11px monospace'; ctx.fillStyle = '#a5b4b9'; ctx.fillText(`${lo.toFixed(1)} … ${hi.toFixed(1)}`, 12, top + 38);
-      ctx.strokeStyle = '#32464b'; ctx.beginPath(); ctx.moveTo(180, top + 85); ctx.lineTo(width - 12, top + 85); ctx.stroke();
+      ctx.font = '14px Arial'; ctx.fillStyle = '#e7e5df'; ctx.fillText(label, 12, top + 18);
+      ctx.font = '11px monospace'; ctx.fillStyle = '#a4a1af'; ctx.fillText(`${lo.toFixed(1)} … ${hi.toFixed(1)}`, 12, top + 38);
+      ctx.strokeStyle = '#35323f'; ctx.beginPath(); ctx.moveTo(180, top + 85); ctx.lineTo(width - 12, top + 85); ctx.stroke();
       ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.beginPath(); let pen = false;
       for (const s of samples) {
         const v = s.e?.[key];
@@ -52,7 +52,7 @@ export function mountMatchday(api) {
         if (pen) ctx.lineTo(x, y); else ctx.moveTo(x, y); pen = true;
       }
       ctx.stroke();
-      if (!finite.length) { ctx.fillStyle = '#a5b4b9'; ctx.fillText('No declared values in this window', 200, top + 55); }
+      if (!finite.length) { ctx.fillStyle = '#a4a1af'; ctx.fillText('No declared values in this window', 200, top + 55); }
     });
     chart.dataset.fps = String(fps);
   }
@@ -129,10 +129,26 @@ export function mountMatchday(api) {
   });
   document.addEventListener('fullscreenchange', () => { $('fullscreenButton').textContent = document.fullscreenElement ? 'Exit fullscreen' : '⛶ Fullscreen'; });
   const video = $('heroVideo'), motion = $('heroMotion'), reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  function hero(playing) { if (playing) { if (!video.getAttribute('src')) video.src = './media/synthetic-demo.mp4'; video.play().then(() => { motion.textContent = 'Pause synthetic preview'; motion.setAttribute('aria-pressed','true'); }).catch(() => { motion.textContent = 'Play synthetic preview'; }); } else { video.pause(); motion.textContent = 'Play synthetic preview'; motion.setAttribute('aria-pressed','false'); } }
-  motion.addEventListener('click', () => hero(video.paused));
-  if (!reduce.matches) hero(true);
-  reduce.addEventListener('change', () => { if (reduce.matches) hero(false); });
+  let heroWanted = !reduce.matches, heroVisible = false;
+  const canPlayHero = () => heroWanted && heroVisible && !document.hidden;
+  function hero() {
+    if (!canPlayHero()) {
+      video.pause(); motion.textContent = 'Play synthetic preview';
+      motion.setAttribute('aria-pressed', 'false'); return;
+    }
+    if (!video.getAttribute('src')) video.src = './media/synthetic-demo.mp4';
+    video.play().then(() => {
+      if (!canPlayHero()) { video.pause(); return; }
+      motion.textContent = 'Pause synthetic preview'; motion.setAttribute('aria-pressed', 'true');
+    }).catch(() => { motion.textContent = 'Play synthetic preview'; motion.setAttribute('aria-pressed', 'false'); });
+  }
+  motion.addEventListener('click', () => { heroWanted = video.paused; hero(); });
+  const heroObserver = new IntersectionObserver(entries => {
+    heroVisible = entries[0].isIntersecting; hero();
+  }, {threshold: .1});
+  heroObserver.observe(video);
+  document.addEventListener('visibilitychange', hero);
+  reduce.addEventListener('change', () => { if (reduce.matches) { heroWanted = false; hero(); } });
   const observer = new IntersectionObserver(entries => { for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-visible'); document.querySelectorAll('.primary-nav a[href^="#"]').forEach(a => { if (a.hash === '#'+e.target.id) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); }); } }, {threshold:.12});
   for (const section of document.querySelectorAll('main > section')) { if (!reduce.matches && section.id !== 'top') section.classList.add('reveal-ready'); observer.observe(section); }
   return {sequence, frame};

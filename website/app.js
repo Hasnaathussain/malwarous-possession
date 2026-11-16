@@ -77,7 +77,7 @@ const controlIds = [
 ];
 
 const stateNames = { H: "Home", A: "Away", D: "Dead ball", X: "Unlabelled" };
-const defaults = { home: "#d6e79d", away: "#ee946d", numbers: true, grid: false, trails: false, regions: false, reference: false };
+const defaults = { home: "#9d90ff", away: "#f2a93b", numbers: true, grid: false, trails: false, regions: false, reference: false };
 const pitchCtx = els.pitchCanvas.getContext("2d", { alpha: false });
 
 let indexData = null;
@@ -426,11 +426,11 @@ function pitchPoint(xM, yM, pitch, length, breadth) {
 }
 
 function drawPitchLines(ctx, width, height, pitch, length, breadth, options) {
-  ctx.fillStyle = "#103229";
+  ctx.fillStyle = "#111116";
   ctx.fillRect(0, 0, width, height);
-  ctx.fillStyle = "#174237";
+  ctx.fillStyle = "#181820";
   ctx.fillRect(pitch.x, pitch.y, pitch.w, pitch.h);
-  ctx.strokeStyle = "rgba(239,239,219,.73)";
+  ctx.strokeStyle = "rgba(231,229,223,.55)";
   ctx.lineWidth = Math.max(1, Math.min(width, height) * 0.0024);
   ctx.strokeRect(pitch.x, pitch.y, pitch.w, pitch.h);
   const line = (x1, y1, x2, y2, dashed = false) => {
@@ -448,7 +448,7 @@ function drawPitchLines(ctx, width, height, pitch, length, breadth, options) {
   ctx.beginPath();
   ctx.arc(cx, cy, 9.15 * pitch.scale, 0, Math.PI * 2);
   ctx.stroke();
-  ctx.fillStyle = "rgba(239,239,219,.73)";
+  ctx.fillStyle = "rgba(231,229,223,.55)";
   ctx.beginPath();
   ctx.arc(cx, cy, Math.max(1.5, pitch.scale * .18), 0, Math.PI * 2);
   ctx.fill();
@@ -462,7 +462,7 @@ function drawPitchLines(ctx, width, height, pitch, length, breadth, options) {
   ctx.strokeRect(pitch.x + pitch.w - goalDepth * pitch.scale, cy - goalHalf * pitch.scale, goalDepth * pitch.scale, goalHalf * 2 * pitch.scale);
   const spotX1 = pitchPoint(11, breadth / 2, pitch, length, breadth);
   const spotX2 = pitchPoint(length - 11, breadth / 2, pitch, length, breadth);
-  ctx.fillStyle = "rgba(239,239,219,.78)";
+  ctx.fillStyle = "rgba(231,229,223,.65)";
   for (const [sx, sy] of [spotX1, spotX2]) {
     ctx.beginPath();
     ctx.arc(sx, sy, Math.max(1.2, pitch.scale * .15), 0, Math.PI * 2);
@@ -470,7 +470,7 @@ function drawPitchLines(ctx, width, height, pitch, length, breadth, options) {
   }
 
   if (options.grid) {
-    ctx.strokeStyle = "rgba(225,233,201,.12)";
+    ctx.strokeStyle = "rgba(157,144,255,.12)";
     ctx.lineWidth = 1;
     for (let x = 10; x < length; x += 10) line(x, 0, x, breadth);
     for (let y = 10; y < breadth; y += 10) line(0, y, length, y);
@@ -481,10 +481,10 @@ function drawPitchLines(ctx, width, height, pitch, length, breadth, options) {
     if (bx !== null && by !== null) {
       const col = Math.min(2, Math.max(0, Math.floor((bx / length) * 3)));
       const row = Math.min(2, Math.max(0, Math.floor((by / breadth) * 3)));
-      ctx.fillStyle = "rgba(207,223,130,.17)";
+      ctx.fillStyle = "rgba(157,144,255,.17)";
       ctx.fillRect(pitch.x + col * pitch.w / 3, pitch.y + row * pitch.h / 3, pitch.w / 3, pitch.h / 3);
     }
-    ctx.strokeStyle = "rgba(241,233,170,.5)";
+    ctx.strokeStyle = "rgba(242,169,59,.5)";
     ctx.lineWidth = 1;
     for (let part = 1; part < 3; part++) {
       const x = pitch.x + pitch.w * part / 3;
@@ -540,7 +540,7 @@ function drawTrails(ctx, data, sampleIndex, pitch, length, breadth, colors) {
 function drawPitch(ctx, width, height, options = {}) {
   const data = options.data || currentData;
   if (!data) {
-    ctx.fillStyle = "#103229";
+    ctx.fillStyle = "#111116";
     ctx.fillRect(0, 0, width, height);
     return;
   }
@@ -577,10 +577,10 @@ function drawPitch(ctx, width, height, options = {}) {
     ctx.fillStyle = teamColor;
     ctx.fill();
     ctx.lineWidth = Math.max(1.4, width * .0023);
-    ctx.strokeStyle = "rgba(8,34,28,.9)";
+    ctx.strokeStyle = "rgba(14,14,17,.9)";
     ctx.stroke();
     if ((options.numbers ?? els.numbersToggle.checked) && entry && entry.number !== undefined && entry.number !== null) {
-      ctx.fillStyle = "#132c27";
+      ctx.fillStyle = "#0e0e11";
       ctx.font = `700 ${Math.max(7, playerRadius * 1.4)}px ${getComputedStyle(document.body).fontFamily}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -592,17 +592,17 @@ function drawPitch(ctx, width, height, options = {}) {
     const [bx, by] = pitchPoint(safeNum(sample.b[0]) / scale, safeNum(sample.b[1]) / scale, pitch, length, breadth);
     const r = Math.max(5.3, Math.min(9, width * .011));
     ctx.beginPath(); ctx.arc(bx, by, r + 2.3, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(10,35,29,.65)"; ctx.fill();
+    ctx.fillStyle = "rgba(14,14,17,.65)"; ctx.fill();
     ctx.beginPath(); ctx.arc(bx, by, r, 0, Math.PI * 2);
-    ctx.fillStyle = "#f1e9aa"; ctx.fill();
-    ctx.lineWidth = 1.2; ctx.strokeStyle = "#102f27"; ctx.stroke();
+    ctx.fillStyle = "#e7e5df"; ctx.fill();
+    ctx.lineWidth = 1.2; ctx.strokeStyle = "#0e0e11"; ctx.stroke();
     ctx.beginPath(); ctx.moveTo(bx - r * .48, by); ctx.lineTo(bx + r * .48, by); ctx.moveTo(bx, by - r * .48); ctx.lineTo(bx, by + r * .48);
-    ctx.strokeStyle = "rgba(16,47,39,.58)"; ctx.stroke();
+    ctx.strokeStyle = "rgba(14,14,17,.58)"; ctx.stroke();
   }
 
   if (options.exportMeta) {
     const footerHeight = options.footerHeight || 52;
-    ctx.fillStyle = "#103229";
+    ctx.fillStyle = "#111116";
     ctx.fillRect(0, height, width, footerHeight);
     ctx.fillStyle = "#f7f5ec";
     ctx.textAlign = "left";

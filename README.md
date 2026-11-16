@@ -8,16 +8,16 @@ An offline football possession engine with observable context, persistent sequen
 
 **Muhammad Hasnaat Hussain · Kabir Niazi · Younus Rehmatullah**
 
-![Python 3.11.9](https://img.shields.io/badge/Python-3.11.9-123d32)
-![MIT code](https://img.shields.io/badge/code-MIT-123d32)
-![External data CC BY 4.0](https://img.shields.io/badge/external_data-CC_BY_4.0-123d32)
-![Frame contract](https://img.shields.io/badge/25_fps-199%2C319_frames-123d32)
+![Python 3.11.9](https://img.shields.io/badge/Python-3.11.9-3f2db5)
+![MIT code](https://img.shields.io/badge/code-MIT-3f2db5)
+![External data CC BY 4.0](https://img.shields.io/badge/external_data-CC_BY_4.0-3f2db5)
+![Frame contract](https://img.shields.io/badge/25_fps-199%2C319_frames-3f2db5)
 
 **[Open interactive Atlas →](https://malwarous-atlas.vercel.app)** · [Technical PDF](submission/Malwarous.pdf) · [Repository guide](docs/REPOSITORY_MAP.md)
 
-[![Possession Atlas: licensed external tracking replay](docs/figures/atlas-replay.png)](https://malwarous-atlas.vercel.app/#replay)
+[![Possession Atlas: Malwarous evidence lab with original synthetic schematic and preview](docs/figures/atlas-cyber-hero.png)](https://malwarous-atlas.vercel.app/)
 
-<sub>Licensed external replay: Bassek, Rein, Weber & Memmert, CC BY 4.0. Positions thinned for display; state intervals retain full frame support. No competition-match imagery.</sub>
+<sub>Original synthetic schematic and software-fixture poster. Public replay uses licensed external data by Bassek, Rein, Weber & Memmert, CC BY 4.0. No competition-match imagery.</sub>
 
 </div>
 
@@ -25,7 +25,7 @@ An offline football possession engine with observable context, persistent sequen
 
 The frozen submission is **`context_p10_r0`**. It produces H / A / D / X labels from tactical tracking, treats missing observations as missing evidence, and decodes each half independently. It uses future context and runs offline.
 
-Atlas lets you play six licensed matches, compare V1/V2 timelines, zoom into spells, inspect observation support and evidence, and explore a synthetic decoder. It replays saved development outputs; it is not live model inference. The squad cards introduce our community through a football metaphor.
+Atlas lets you play six licensed matches, compare V1/V2 timelines, zoom into spells, inspect observation support and evidence, and explore a synthetic decoder. It replays saved development outputs; it is not live model inference. The people section introduces the three-person team and the wider Malwarous community.
 
 ## Method
 

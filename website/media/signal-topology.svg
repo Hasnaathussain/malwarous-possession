@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 190" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Observation to decoded sequence</title>
+  <desc id="desc">Original illustrative schematic: sampled positions, 65 observable features, H/A/D estimates and half-wise decoding. Not match measurements.</desc>
+  <defs><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0v28" stroke="#E7E5DF" stroke-opacity=".04"/></pattern><linearGradient id="trace"><stop stop-color="#9D90FF"/><stop offset="1" stop-color="#F2A93B"/></linearGradient></defs>
+  <path fill="#111116" d="M0 0h720v190H0z"/><path fill="url(#grid)" d="M0 0h720v190H0z"/>
+  <path d="M77 76h566" stroke="#E7E5DF" stroke-opacity=".12" stroke-dasharray="2 8"/>
+  <path d="M77 76c60-67 115-67 185 0s110 67 180 0 130-67 201 0" stroke="url(#trace)" stroke-width="2"/>
+  <g stroke="#9D90FF" fill="#111116" stroke-width="2"><circle cx="77" cy="76" r="25"/><circle cx="262" cy="76" r="25"/><circle cx="442" cy="76" r="25"/><circle cx="643" cy="76" r="25" stroke="#F2A93B"/></g>
+  <g font-family="monospace" font-size="18" fill="#9D90FF" text-anchor="middle"><text x="77" y="82">01</text><text x="262" y="82">02</text><text x="442" y="82">03</text><text x="643" y="82" fill="#F2A93B">04</text></g>
+  <g font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#E7E5DF" text-anchor="middle"><text x="77" y="131">Positions</text><text x="262" y="131">Context</text><text x="442" y="131">H / A / D</text><text x="643" y="131">Sequence</text></g>
+  <g font-family="Arial,sans-serif" font-size="17" fill="#A09EAA" text-anchor="middle"><text x="77" y="158">observed samples</text><text x="262" y="158">65 features</text><text x="442" y="158">state estimates</text><text x="643" y="158">offline Viterbi</text></g>
+</svg>

@@ -27,16 +27,16 @@
       "sha256": "200d70f8abd0794c492f8cd9030aea79276942a1ea903d02aa48ec78c9aaf7f2"
     },
     {
-      "bytes": 8509,
+      "bytes": 8562,
       "classification": "source_or_external_report",
       "path": "README.md",
-      "sha256": "de89d97aad70e368adf7fdf93f5cc0cf639d2d5c50cb02d7f202ead02419c6a1"
+      "sha256": "6542ed2ea5358f32b3f63a6e43f2c9a8f099f11b47f78a704f8b045fab79fc44"
     },
     {
-      "bytes": 2883,
+      "bytes": 2943,
       "classification": "source_or_external_report",
       "path": "SECURITY.md",
-      "sha256": "6a67b7844374b67df2e69708440fcd19bf33fee281a56b4cd6479c3a533bebfc"
+      "sha256": "ccd99f933f0e96fc5eb354b40361127753e2de11e1e4cb166ddd05201a47bb9d"
     },
     {
       "bytes": 3995,
@@ -69,10 +69,16 @@
       "sha256": "6919b815cb131f4965d09e07d508cceabccf01963055c70dd3fe3a1655d1a01f"
     },
     {
-      "bytes": 8578,
+      "bytes": 5161,
+      "classification": "source_or_external_report",
+      "path": "docs/ATLAS_MONITORING.md",
+      "sha256": "ae720a8c70bfdc4394bba1dc344a6bfa8823758883cd346ee59b34f82c9354b5"
+    },
+    {
+      "bytes": 10029,
       "classification": "source_or_external_report",
       "path": "docs/CONTINUATION_LEDGER.md",
-      "sha256": "de21b5f4c1ef1e7380e0fd9f2013f014288575c3c72108994be9d238bef3c1f1"
+      "sha256": "b4170a2e0912e306d8dba0a8b5976bfae6ebd3617cd386ab6da3e9af895a6f2d"
     },
     {
       "bytes": 4451,
@@ -99,10 +105,10 @@
       "sha256": "f3638a342516a17ff69f34f61d620e0a1c60425cc51a09c7025c058f8112f964"
     },
     {
-      "bytes": 4427,
+      "bytes": 4746,
       "classification": "source_or_external_report",
       "path": "docs/REPOSITORY_MAP.md",
-      "sha256": "251672edb321a0b12f4ea1194c85b5c6061360ea26a4e47e363f0a1ba5df5b20"
+      "sha256": "60e05f785d69a3de0e752088765d3f20986f130f34c5474392c18d7d18c10cca"
     },
     {
       "bytes": 7003,
@@ -217,6 +223,12 @@
       "classification": "source_or_external_report",
       "path": "docs/experiments/v6-results.json",
       "sha256": "114a2668351a191ad914b6cdb16b32c765b57c4231dc1a6f49fc298aeaac01d3"
+    },
+    {
+      "bytes": 507680,
+      "classification": "source_or_external_report",
+      "path": "docs/figures/atlas-cyber-hero.png",
+      "sha256": "cfbed7ab6d6a1bcc64a56c8d65d8fef1ccd0412bc93fb4abadbcc7dc5bd7aeb8"
     },
     {
       "bytes": 19818,
@@ -453,10 +465,10 @@
       "sha256": "e9e7d7dd35fa1bc44c610598dfa10201a024d4e795483a7eaed465e2229086a0"
     },
     {
-      "bytes": 16246,
+      "bytes": 18670,
       "classification": "source_or_external_report",
       "path": "scripts/check_public_site.mjs",
-      "sha256": "c7e92cb30fe3ff65ad4c4b05a5a2643e73aae6f221498b1fd8163aacf6e9415f"
+      "sha256": "bcb81c4f35197fa9e9f5253421169fc3de108a0ff5016d82be3bd2cf54f6b825"
     },
     {
       "bytes": 16762,
@@ -495,10 +507,10 @@
       "sha256": "9ca84adcec18d7aafa7410d3495f4ccf2b1d645de7690bc05caed691d634ae18"
     },
     {
-      "bytes": 6109,
+      "bytes": 6806,
       "classification": "source_or_external_report",
       "path": "scripts/release_integrity.py",
-      "sha256": "f7f7c590b7e48544b7222cf7545559ad8f17638ae93ae9eee6df7959bce3e1e0"
+      "sha256": "9c43aeb94d9a8b23a2741262a473365a890cd0f0270b1cce66fcf6e8da448fa0"
     },
     {
       "bytes": 24277,
@@ -511,6 +523,12 @@
       "classification": "source_or_external_report",
       "path": "scripts/serve_public_site.py",
       "sha256": "cdddd89f4bd6471812b26c2e60136b14868d265166d5b70e759c9042d83c8ccc"
+    },
+    {
+      "bytes": 4416,
+      "classification": "source_or_external_report",
+      "path": "scripts/test_analytics.mjs",
+      "sha256": "d3f1abc3ccf05a868c1bcb4b7f81b68606332e412e58cfa8a6e5a46feae1602a"
     },
     {
       "bytes": 3359,
@@ -609,10 +627,10 @@
       "sha256": "4590e444a97876c616159b7806bcee5179ad328022f62b88bf2c65a0b18fe20a"
     },
     {
-      "bytes": 3381,
+      "bytes": 3939,
       "classification": "source_or_external_report",
       "path": "tests/test_release_integrity.py",
-      "sha256": "06919306433393b6e5a434f101f059f0bc5763e2156d9aa44bc46c9f3f48d347"
+      "sha256": "08cf2ed2b180df0ca781990c761905a03a368d71e31933699cd3016838dbf62a"
     },
     {
       "bytes": 3357,
@@ -675,10 +693,16 @@
       "sha256": "3ca626a8b07be69ccc81d71cd512503ce66976ad29dadc757c4d018b53401950"
     },
     {
-      "bytes": 814,
+      "bytes": 812,
       "classification": "source_or_external_report",
       "path": "website/404.html",
-      "sha256": "1b1fb7c658284c638a25efc70b87a341f2a928d5d078bb94a6837b4585465f74"
+      "sha256": "1e7cb205592fcd811c2a4ad15a75d357cd3a16d8474eef971f89c896fceb8656"
+    },
+    {
+      "bytes": 1755,
+      "classification": "source_or_external_report",
+      "path": "website/DESIGN.md",
+      "sha256": "9b71e960a7986c565ea2af388ea7a923931cc7b11f895610537ff7141029d748"
     },
     {
       "bytes": 3784,
@@ -687,46 +711,100 @@
       "sha256": "03f32e04936e4ea263f3f04f7473795fb4be91944200e1f03aaf5e4ae44d414e"
     },
     {
-      "bytes": 4022,
+      "bytes": 4232,
       "classification": "source_or_external_report",
       "path": "website/README.md",
-      "sha256": "dec003d639257e4788242d8e532bde8c3cd09c24d461198c3665f8d91f38f207"
+      "sha256": "918ace56d62e9c43f82d4fc17b28cc67803ca0febdaedd587d186c998603ffa6"
     },
     {
-      "bytes": 820,
+      "bytes": 1348,
       "classification": "source_or_external_report",
       "path": "website/analytics.js",
-      "sha256": "4347afb270f7e084cd42fa3e2cc8aecc5438ce626eb09db0b71505a8b06c5fa5"
+      "sha256": "44cb37c939c0c3f8410a0a109d5c18aa8d7b74f3cd54d295839281d149d0746f"
     },
     {
       "bytes": 48366,
       "classification": "source_or_external_report",
       "path": "website/app.js",
-      "sha256": "6766e791e8cc48480b4abe58380ec38671e0f71031ea1ddef25276939579a785"
+      "sha256": "1d3e55d6e7421b8486f155b33f8d1fbc433adcc0752d7623a45cdb3cc8eff33d"
     },
     {
       "bytes": 263,
       "classification": "source_or_external_report",
       "path": "website/favicon.svg",
-      "sha256": "8d8d0b43f60d1778f8d921f67b71bb36bbef75e7b09246e403a70b3d493d61de"
+      "sha256": "c747ae284d5d84990b317056cb1778796cb47a54b6bcfcaffb663c12618caede"
     },
     {
-      "bytes": 29792,
+      "bytes": 2484,
+      "classification": "source_or_external_report",
+      "path": "website/immersive.js",
+      "sha256": "146431fa6244e0f42648d5f2eb64ac3de12e56104f7cbdfed002d869e1f5f2bf"
+    },
+    {
+      "bytes": 35087,
       "classification": "source_or_external_report",
       "path": "website/index.html",
-      "sha256": "d3ec3d0cea5e9b0fe4e48347fc83850cfd526b68d50bafd8f098885051310da8"
+      "sha256": "8520926f8c8d7762507567f5b10afd6e839c99d47e15ce31ed5aded9c0ff8171"
     },
     {
-      "bytes": 12441,
+      "bytes": 12940,
       "classification": "source_or_external_report",
       "path": "website/matchday.js",
-      "sha256": "32f2b2c5e845a3ec6797aa8801849b00d8a54fbcd7e67136de181d45f964daa5"
+      "sha256": "9b75fe657a0d7a8ff58fad5f647cdb444d4e6d8cfbc6b05909709f20b5b35fd7"
+    },
+    {
+      "bytes": 4387,
+      "classification": "source_or_external_report",
+      "path": "website/media/fonts/Archivo-OFL.txt",
+      "sha256": "1778201b7bd33e8c08a2eda32a4ad2f69bc38ced9731b01cc3fc47f268c8ef3c"
+    },
+    {
+      "bytes": 4362,
+      "classification": "source_or_external_report",
+      "path": "website/media/fonts/IBM-Plex-Sans-OFL.txt",
+      "sha256": "d741e57d5f865e294df801f96b7b5161a88b211df65887e4358d271c9fc5fb4f"
+    },
+    {
+      "bytes": 4399,
+      "classification": "source_or_external_report",
+      "path": "website/media/fonts/JetBrains-Mono-OFL.txt",
+      "sha256": "b2fe5e8987594e9ffd1d2ca52a2f5d73eb8335243893c5d6254b5ad69269591d"
+    },
+    {
+      "bytes": 917,
+      "classification": "source_or_external_report",
+      "path": "website/media/fonts/README.md",
+      "sha256": "fd4d6c4fe2878717ff7c8d97fd98e66b0cc792b33ff087346961a9524d1cd7ae"
+    },
+    {
+      "bytes": 111948,
+      "classification": "source_or_external_report",
+      "path": "website/media/fonts/archivo-800.ttf",
+      "sha256": "745c7f810c448f256b66e1beaf8d6ccc2be98c01e531a1da8b1e8cf805a5b857"
+    },
+    {
+      "bytes": 205252,
+      "classification": "source_or_external_report",
+      "path": "website/media/fonts/ibm-plex-sans-400.ttf",
+      "sha256": "6dbe082463cf749cfa057d45c3048c90f4df031496498e5b5bdfd0b6babb9d16"
+    },
+    {
+      "bytes": 112172,
+      "classification": "source_or_external_report",
+      "path": "website/media/fonts/jetbrains-mono-400.ttf",
+      "sha256": "44ce4a84f20d60f24539bd0cef11f79c29e38609e0f8adf18551c9794a5d9dc3"
     },
     {
       "bytes": 1388,
       "classification": "source_or_external_report",
       "path": "website/media/matchday-poster.svg",
       "sha256": "98daed15dd6a4b601b9ccca47b65995c35d2b3c1b7a366412f74303e373bf334"
+    },
+    {
+      "bytes": 1844,
+      "classification": "source_or_external_report",
+      "path": "website/media/signal-topology.svg",
+      "sha256": "d4928762a6ae4d5a3134bf1a0a89e01ffe297f663fdecea7881a58695eb1a848"
     },
     {
       "bytes": 306483,
@@ -837,16 +915,16 @@
       "sha256": "16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95"
     },
     {
-      "bytes": 36112,
+      "bytes": 36042,
       "classification": "source_or_external_report",
       "path": "website/sandbox.js",
-      "sha256": "b260746bff426ed7ea1d4f21839d2e3cb4f9011b790866e81c2b933fc3b7328b"
+      "sha256": "e80916a308b61e1ca6194db85ba5118703268f7725e79283fd1d3c48ae3ef16a"
     },
     {
-      "bytes": 49379,
+      "bytes": 50519,
       "classification": "source_or_external_report",
       "path": "website/styles.css",
-      "sha256": "cccc03125f50d43e1f61c86050942e23d8bfa5ef13260a531e09472282a28ac0"
+      "sha256": "2e8d5253424f45981d534900e3182c22e7d43332ec64bf2cc288426390333fde"
     },
     {
       "bytes": 977,

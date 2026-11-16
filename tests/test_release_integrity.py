@@ -78,3 +78,16 @@ def test_only_hash_pinned_public_preview_images_are_allowed(tmp_path):
     unknown.write_bytes(b'\x00unreviewed')
     with pytest.raises(ValueError):
         review.source_bytes(tmp_path, 'docs/figures/unreviewed.png')
+
+
+def test_public_fonts_are_fixed_path_and_checksum_gated(tmp_path):
+    name = next(iter(release.PUBLIC_FONTS))
+    path = tmp_path / name
+    path.parent.mkdir(parents=True)
+    path.write_bytes(b'\x00unreviewed font')
+    with pytest.raises(ValueError, match='public font checksum'):
+        release.source_bytes(tmp_path, name)
+    unknown = path.with_name('other.ttf')
+    unknown.write_bytes(path.read_bytes())
+    with pytest.raises(ValueError, match='binary content'):
+        release.source_bytes(tmp_path, unknown.relative_to(tmp_path).as_posix())

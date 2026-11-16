@@ -14,10 +14,18 @@ PUBLIC_VIDEO = 'website/media/synthetic-demo.mp4'
 PUBLIC_VIDEO_SHA256 = '61d04f220ac6aae121b930626ddeb46cd756e3c3f65a2e6e0bebf7b6f21c2f2c'
 
 PUBLIC_FIGURES = {
+    'docs/figures/atlas-cyber-hero.png': 'cfbed7ab6d6a1bcc64a56c8d65d8fef1ccd0412bc93fb4abadbcc7dc5bd7aeb8',
     'docs/figures/atlas-replay.png': '824985dd34917532a433b85d03b0ca98fbd4d6212617553b394b6b2279659ccb',
     'docs/figures/atlas-evidence.png': '0946d0c8e6b3e09ec819602f2cc36c76306575ed5a55bb6beb274bddfd7f3e5d',
     'docs/figures/decoder-lab.png': '013c567b80a849e1f2d1b5e75a041577e4463ca780207b122c831658ad38cb5f',
     'docs/figures/atlas-squad.png': '1198443e3e574825ffc65f014ab5f358bed66e3fb4a140b94cd7c1a457a627d4',
+}
+
+# Reviewed, self-hosted OFL typefaces. Unknown binary assets remain prohibited.
+PUBLIC_FONTS = {
+    'website/media/fonts/archivo-800.ttf': '745c7f810c448f256b66e1beaf8d6ccc2be98c01e531a1da8b1e8cf805a5b857',
+    'website/media/fonts/ibm-plex-sans-400.ttf': '6dbe082463cf749cfa057d45c3048c90f4df031496498e5b5bdfd0b6babb9d16',
+    'website/media/fonts/jetbrains-mono-400.ttf': '44ce4a84f20d60f24539bd0cef11f79c29e38609e0f8adf18551c9794a5d9dc3',
 }
 
 REPORT_SHA256 = '743702395ee6e95a6bb769608527af95423c8ab7b34903182783241d6ff9e8e8'
@@ -84,6 +92,9 @@ def source_bytes(root: Path, name: str) -> bytes:
     elif name in PUBLIC_FIGURES:
         if digest(content) != PUBLIC_FIGURES[name]:
             raise ValueError('public figure checksum differs')
+    elif name in PUBLIC_FONTS:
+        if digest(content) != PUBLIC_FONTS[name]:
+            raise ValueError('public font checksum differs')
     elif name not in (MODEL, 'submission/Malwarous.pdf'):
         content.decode('utf-8')
         if b'\x00' in content:

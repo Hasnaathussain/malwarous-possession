@@ -172,7 +172,8 @@ try {
   await call('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
   await evaluate(`window.scrollTo(0,0)`); await sleep(150);
   const mobile = await evaluate(`({width:innerWidth,body:document.body.scrollWidth,document:document.documentElement.scrollWidth})`);
-  assert.ok(mobile.width === 390 && mobile.body <= 391 && mobile.document <= 391, JSON.stringify(mobile));
+  assert.ok(mobile.width === 390 && mobile.body <= 391 && mobile.document <= 391,
+    JSON.stringify({...mobile, overflow: await evaluate(`Array.from(document.querySelectorAll('body *')).filter(e=>e.getBoundingClientRect().right>390 && !e.closest('.table-scroll') && getComputedStyle(e).position!=='absolute').map(e=>({tag:e.tagName,id:e.id,cls:String(e.className),right:e.getBoundingClientRect().right})).slice(0,14)`)}));
   await screenshot('mobile-top.png');
   await click('menuToggle');
   assert.equal(await evaluate(`document.getElementById('menuToggle').getAttribute('aria-expanded')`), 'true');
@@ -192,11 +193,33 @@ try {
   assert.deepEqual(failedResponses, [], 'Failed application response');
   const external = requests.filter(url => /^https?:/.test(url) && new URL(url).origin !== origin.origin);
   assert.deepEqual(external, [], 'Unexpected external application request');
+  // A failed public index must provide a recovery path, not a stuck loading view.
+  await call('Network.setBlockedURLs', {urls: [`${base}/replays/index.json*`]});
+  await call('Page.navigate', {url: base});
+  await waitFor(`document.getElementById('retryLoad') && !document.getElementById('retryLoad').hidden`, 'explicit replay load error');
+  assert.equal(await evaluate(`document.getElementById('dataState').dataset.tone`), 'error');
+  await call('Network.setBlockedURLs', {urls: []});
+  await click('retryLoad');
+  await waitFor(`!document.getElementById('playButton').disabled && document.getElementById('retryLoad').hidden`, 'retry recovers the replay');
+  // Motion is optional; the synthetic hero stops when it leaves the viewport.
+  await call('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'no-preference'}]});
+  await call('Page.navigate', {url: base});
+  await waitFor(`document.getElementById('playButton') && !document.getElementById('playButton').disabled`, 'normal-motion startup');
+  await evaluate(`document.getElementById('heroVideo').scrollIntoView({block:'center',behavior:'instant'})`);
+  await waitFor(`!document.getElementById('heroVideo').paused && document.getElementById('heroVideo').currentTime>.1`, 'synthetic hero autoplay');
+  await evaluate(`document.getElementById('squad').scrollIntoView({block:'center',behavior:'instant'})`);
+  await waitFor(`document.getElementById('heroVideo').paused && getComputedStyle(document.getElementById('squad')).opacity==='1'`, 'offscreen hero pause and section reveal');
+  await call('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});
+  await evaluate(`document.getElementById('heroVideo').scrollIntoView({block:'center',behavior:'instant'})`);
+  await sleep(150);
+  assert.equal(await evaluate(`document.getElementById('heroVideo').paused`), true, 'Reduced motion suppresses autoplay');
+  assert.deepEqual(errors, [], 'Browser exception during recovery or motion checks');
   console.log(JSON.stringify({status: 'pass', initial, mobile, media_time_s: mediaTime,
     checks: ['public source gate', 'replay load', 'frame seek/step', 'transition jump', 'playback',
       'benchmark scenario filter', 'share URL', 'team colors and display controls', 'interactive decoder lab',
       'synthetic video seek/play clock', '320/390/768/1366px layouts', 'mobile navigation',
-      'attributed PNG export', 'zoom/minimap/state filters/difference view', 'fullscreen/help', 'evidence tooltips', 'browser errors', 'same-origin requests'], screenshots: folder}));
+      'attributed PNG export', 'zoom/minimap/state filters/difference view', 'fullscreen/help', 'evidence tooltips',
+      'failed-load retry recovery', 'normal/reduced motion and offscreen video pause', 'browser errors', 'same-origin requests'], screenshots: folder}));
 } finally {
   socket?.close(); browser.kill();
 }
