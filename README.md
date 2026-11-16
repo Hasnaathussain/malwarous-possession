@@ -3,6 +3,9 @@
 Possession inference from incomplete football tracking, with a local analysis workbench
 and **Possession Atlas**, an interactive public replay and model guide.
 
+**[Open Possession Atlas](https://malwarous-atlas.vercel.app)** ·
+[Website guide](website/README.md) · [Technical note](docs/TECHNICAL_NOTE.md)
+
 The frozen candidate is **context_p10_r0**: two contextual tree classifiers and
 half-wise persistent decoding. It uses 65 observable features, team symmetry and
 explicit observation support. It is an **offline** method using future context.

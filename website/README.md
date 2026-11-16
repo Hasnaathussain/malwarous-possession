@@ -4,6 +4,8 @@ An original, dependency-free public companion to Malwarous. It replays saved
 external-development model outputs, explains the frozen method and exposes an
 illustrative sequence-decoder lab. It runs entirely in the browser.
 
+**[Live website](https://malwarous-atlas.vercel.app)**
+
 ## Preview
 
 From the repository root, with Python 3.11 or later:

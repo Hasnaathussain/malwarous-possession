@@ -975,6 +975,7 @@ function currentShareUrl() {
   const url = new URL(window.location.href);
   url.searchParams.set("replay", currentMeta.id);
   url.searchParams.set("frame", String(Math.round(currentFrame)));
+  url.hash = "replay";
   return url.toString();
 }
 

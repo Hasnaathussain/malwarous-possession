@@ -47,6 +47,11 @@ unexpected cross-origin application requests were observed. The site has no
 dependency installation or inference service. The frozen algorithm and scores
 are unchanged; website controls operate on display fixtures only.
 
+The production Vercel site is [Possession Atlas](https://malwarous-atlas.vercel.app).
+The same browser flow passed there anonymously. Deployment serves only `website/`;
+checks confirmed security headers, video byte ranges and 404 responses for parent
+submission/model/private paths. The organizer form has not been submitted.
+
 ## Static-analysis findings and their disposition
 
 Bandit 1.9.4 reported four medium and eighteen low-severity findings; no high-
