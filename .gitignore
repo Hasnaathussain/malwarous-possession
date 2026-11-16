@@ -45,3 +45,7 @@ htmlcov/
 
 # Exactly one generated, public-safe demonstration video is permitted.
 !website/media/synthetic-demo.mp4
+
+# Team-requested publication of the exact final submission packet.
+!/submission/Malwarous.csv
+!/submission/Malwarous.pdf

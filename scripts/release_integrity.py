@@ -74,7 +74,7 @@ def source_bytes(root: Path, name: str) -> bytes:
     if name == PUBLIC_VIDEO:
         if digest(content) != PUBLIC_VIDEO_SHA256:
             raise ValueError('public synthetic video checksum differs')
-    elif name != MODEL:
+    elif name not in (MODEL, 'submission/Malwarous.pdf'):
         content.decode('utf-8')
         if b'\x00' in content:
             raise ValueError(f'binary content in text allowlist: {name}')

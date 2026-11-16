@@ -76,3 +76,9 @@ References: [organizer submission requirements](https://github.com/metrica-sport
 [OSV](https://osv.dev/), [pip-audit](https://github.com/pypa/pip-audit),
 [Gitleaks](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1),
 [Bandit](https://github.com/PyCQA/bandit).
+
+## Final packet publication
+
+On 16 November 2026, the team requested publication of the exact final CSV and PDF
+in `submission/`. They are byte copies of the final organizer packet; the source
+inventory covers both. This publication does not complete the organizer form.
