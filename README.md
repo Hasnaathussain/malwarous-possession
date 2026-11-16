@@ -71,7 +71,7 @@ Check that each command succeeds before advancing. The first writes the private
 requires byte identity. No target score is computed or reported. Source, report,
 configuration and model hashes are checked before target processing.
 
-Keep generated outputs and assets out of public Git. The optional private viewer
+The team-requested final packet is published in `submission/`. Keep other generated outputs and all competition assets out of public Git. The optional private viewer
 export is `python -m malwarous.v2.safe_runner v2_local_viewer_export`; its files are
 for local human inspection only. Never send its bundle or viewport to a hosted
 model. Browser QA is for synthetic or licensed public-external fixtures only.
@@ -97,7 +97,7 @@ model. Browser QA is for synthetic or licensed public-external fixtures only.
 Copy the generated `artifacts_private/v2/Malwarous-v2.csv` to the team-named upload
 file without editing its contents. Upload the CSV and technical document through
 the organizer's form separately; they do not need to be committed here.
-Competition assets and generated target outputs stay outside Git history.
+Download the exact final packet from [Malwarous.csv](submission/Malwarous.csv) and [Malwarous.pdf](submission/Malwarous.pdf). Publishing these files does not submit the organizer form. All raw competition assets and other generated outputs remain excluded.
 
 This edition contains the selected algorithm and its dependencies. Older-named
 core modules/configs remain because the frozen runner verifies/imports them.

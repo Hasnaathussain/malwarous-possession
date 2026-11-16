@@ -41,3 +41,7 @@ node_modules/
 .ssh/
 .coverage
 htmlcov/
+
+# Team-requested publication of the exact final submission packet.
+!/submission/Malwarous.csv
+!/submission/Malwarous.pdf

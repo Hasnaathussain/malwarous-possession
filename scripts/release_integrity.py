@@ -68,7 +68,7 @@ def checked_file(root: Path, name: str) -> Path:
 
 def source_bytes(root: Path, name: str) -> bytes:
     content = checked_file(root, name).read_bytes()
-    if name != MODEL:
+    if name not in (MODEL, 'submission/Malwarous.pdf'):
         content.decode('utf-8')
         if b'\x00' in content:
             raise ValueError(f'binary content in text allowlist: {name}')

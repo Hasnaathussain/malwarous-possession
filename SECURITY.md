@@ -5,7 +5,7 @@ This is a single-user local research application. The workbench binds only to
 service, telemetry or external browser dependencies. It is not a public web server.
 
 No API keys or cloud credentials are required. Competition assets, target labels,
-predictions, private viewer exports and logs must stay outside Git history, even
+private viewer exports, other predictions and logs must stay outside Git history, even
 while the repository is private. The organizer requires public code access for
 submission; private visibility does not change the assets' redistribution terms.
 
@@ -24,3 +24,7 @@ then verifies the frozen model/report/source. Do not force-add ignored outputs.
 
 Report a suspected vulnerability privately to the repository owner. Include a
 minimal synthetic reproduction; do not attach credentials or competition data.
+
+The team explicitly requested publication of the final `submission/Malwarous.csv`
+and `submission/Malwarous.pdf`. This exact packet is the exception to prediction
+exclusion; it does not include raw video, tracking or private viewer material.

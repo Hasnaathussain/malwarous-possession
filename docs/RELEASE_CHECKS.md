@@ -4,7 +4,7 @@ Reviewed 16 November 2026. The selected algorithm, fitted weights, official scor
 and frozen source/report/configuration checks are unchanged from the verified V2
 release. This repository contains code, pinned dependencies, external benchmark
 evidence, the local interface and one attributed external-only fitted artifact.
-Competition assets, target CSVs, private viewer data, credentials, logs, environments,
+The original review excluded competition assets, target CSVs, private viewer data, credentials, logs, environments,
 old releases, meeting media and internal planning are excluded.
 
 ## Evidence
@@ -58,3 +58,9 @@ References: [organizer submission requirements](https://github.com/metrica-sport
 [OSV](https://osv.dev/), [pip-audit](https://github.com/pypa/pip-audit),
 [Gitleaks](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1),
 [Bandit](https://github.com/PyCQA/bandit).
+
+## Final packet publication
+
+On 16 November 2026, the team requested publication of the exact final CSV and PDF
+in `submission/`. They are byte copies of the final organizer packet; the source
+inventory covers both. This publication does not complete the organizer form.
