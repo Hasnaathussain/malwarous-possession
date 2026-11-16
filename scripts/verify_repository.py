@@ -17,7 +17,7 @@ if __name__ == '__main__':
     sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from scripts import prepare_review_source as review
+from scripts import release_integrity as review
 
 
 def verify(root: Path) -> dict:

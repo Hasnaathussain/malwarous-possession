@@ -85,11 +85,19 @@ model. Browser QA is for synthetic or licensed public-external fixtures only.
 - [Repository map](docs/REPOSITORY_MAP.md): the purpose of each folder and older dependency names.
 - [Security](SECURITY.md) and [release checks](docs/RELEASE_CHECKS.md).
 
-The organizer requires a **public repository URL for submission**. Keep this
-repository private during team review if desired, then make the reviewed code
-public before submitting the form. Competition assets and generated target CSVs
-stay outside Git history regardless of repository visibility. The CSV and short
-technical document go to the organizer form separately.
+## Submission files
+
+| Organizer form field | What to provide |
+|---|---|
+| Team name | Malwarous |
+| Possession CSV | The regenerated file, named `Malwarous.csv` |
+| Public repository URL | https://github.com/Hasnaathussain/malwarous-possession |
+| Short technical document | [Technical note](docs/TECHNICAL_NOTE.md), uploaded as `Malwarous.md` or the prepared `Malwarous.pdf` |
+
+Copy the generated `artifacts_private/v2/Malwarous-v2.csv` to the team-named upload
+file without editing its contents. Upload the CSV and technical document through
+the organizer's form separately; they do not need to be committed here.
+Competition assets and generated target outputs stay outside Git history.
 
 This edition contains the selected algorithm and its dependencies. Older-named
 core modules/configs remain because the frozen runner verifies/imports them.
@@ -102,11 +110,10 @@ and raw data are excluded. The internal research workspace retains the full audi
 python -B scripts/verify_repository.py
 ```
 
-The verifier checks the tracked inventory and raw source/report/model hashes;
-ignored environments, logs and generated outputs are not committed source. Older
-packaging helpers describe the pre-Git source edition; use `verify_repository.py`
-for this repository. `.gitattributes` preserves mixed LF/CRLF bytes required by
-frozen hashes. Do not run a line-ending formatter over locked sources.
+The verifier checks the tracked inventory, staged bytes and raw source/report/model
+hashes. Ignored environments, logs and generated outputs are not committed source.
+`.gitattributes` preserves mixed LF/CRLF bytes required by frozen hashes. Do not
+run a line-ending formatter over locked sources.
 
 Exact target-byte reproduction was verified on Windows with CPython 3.11.9.
 The standalone replay also passed Ubuntu preflight checks. Cross-platform ML

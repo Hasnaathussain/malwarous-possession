@@ -15,6 +15,8 @@
 | `docs/TEAM_COMPARISON.md` | Fair comparison of three team members' methods |
 | `tests/` | Synthetic contracts, source checks and local HTTP tests |
 | `SOURCE_MANIFEST.json` | Byte inventory of every other committed file |
+| `scripts/verify_repository.py` | Check the tracked inventory, staged bytes and frozen artifacts |
+| `scripts/release_integrity.py` | Path safety and artifact checks used by the verifier |
 
 ## Why older core/configuration names remain
 

@@ -2,7 +2,7 @@
 
 Muhammad Hasnaat Hussain | Kabir Niazi | Younus Rehmatullah
 
-Local review candidate, 14 November 2026. Selected method: **context_p10_r0**. The reproducible v1 fallback remains preserved. Nothing has been submitted or published.
+Selected method: **context_p10_r0**. The fitted artifact and inference pipeline are frozen. Earlier reference dependencies are retained for reproducibility.
 
 ## Method
 
@@ -14,7 +14,7 @@ Two histogram gradient boosting heads estimate alive/dead and live H/A evidence 
 
 ## External evidence
 
-Six licensed DFL/Sportec matches were already consumed during earlier development. Three fixed whole-match folds trained on four matches and predicted the other two. Candidate selection used pooled development results. The final artifact was then fitted on all six; cross-validation scores belong to the excluded-match predictors, not training-set evaluations of that final artifact.
+Six licensed DFL/Sportec matches were already consumed during earlier development. Provider BallStatus and BallPossession fields supply the external H/A/D supervision; no target-match human labels are used. Three fixed whole-match folds trained on four matches and predicted the other two. Candidate selection used pooled development results. The final artifact was then fitted on all six; cross-validation scores belong to the excluded-match predictors, not training-set evaluations of that final artifact.
 
 Each method used identical observations, masks and graded support with the unmodified official scorer. The fixed scenarios were original observations, 40% block ball dropout with mean block 8 frames, and 70% dropout with mean block 25 frames. Primary spellF1 averages the official temporal-IoU thresholds; macroF1 is reported alongside it.
 

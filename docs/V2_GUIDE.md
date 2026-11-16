@@ -50,7 +50,7 @@ From the repository root, use the pinned environment. The frozen review distribu
 .\.venv\Scripts\python.exe -m workbench.server --data artifacts_private/v2/workbench-external.json
 ```
 
-The campaign refuses changed source/config fingerprints and records checkpoints under ignored `artifacts_private/v2`. Its eight-hour wall-clock budget includes resumed attempts. Do not delete locks to restart a possibly live job; inspect the process/session. `v2-results.json` is licensed external benchmark evidence. Cached arrays, fitted artifacts and logs stay ignored. No Git commit or public upload is authorized during development.
+The campaign refuses changed source/config fingerprints and records checkpoints under ignored `artifacts_private/v2`. Its eight-hour wall-clock budget includes resumed attempts. Do not delete locks to restart a possibly live job; inspect the process/session. `v2-results.json` is licensed external benchmark evidence. Cached arrays, other fitted artifacts and logs stay ignored. The development protocols are preserved to explain selection; reproducing the selected submission uses the included frozen weights, not another campaign.
 
 For the original development checkout only, `malwarous.v2.finalize` creates a new external-only model after a complete passing report. It deliberately refuses an existing config or model. Do not use it as setup for the frozen distribution. With the included frozen weights and reviewed adapter, run:
 
