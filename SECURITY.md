@@ -6,7 +6,7 @@ service, telemetry or external browser dependencies. It is not a public web serv
 
 Possession Atlas (`website/`) is a separate static public site. It serves only
 approved licensed external replays and synthetic fixtures, with no backend,
-uploads, credentials, analytics or browser dependencies. Its Vercel configuration
+uploads, credentials or browser package dependencies. Its Vercel configuration
 restricts scripts and network requests to its own origin, forbids framing and
 disables camera/microphone/location permissions. The optional local website
 preview binds to loopback, rejects hidden/out-of-root files and supports media
@@ -36,3 +36,7 @@ minimal synthetic reproduction; do not attach credentials or competition data.
 The team explicitly requested publication of the final `submission/Malwarous.csv`
 and `submission/Malwarous.pdf`. This exact packet is the exception to prediction
 exclusion; it does not include raw video, tracking or private viewer material.
+
+## Optional deployment analytics
+
+A concurrent team-merged Vercel Analytics PR is preserved through the official plain-HTML script integration. It is isolated from replay startup, disabled on loopback and automated browsers, and removes replay query/hash parameters from page-view URLs. If deployment analytics is disabled, replay still works. No match coordinates, predictions, model inputs or form data are passed to analytics. The site keeps its self-origin CSP; no npm package installation is needed.

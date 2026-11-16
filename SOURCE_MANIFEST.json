@@ -33,10 +33,10 @@
       "sha256": "de89d97aad70e368adf7fdf93f5cc0cf639d2d5c50cb02d7f202ead02419c6a1"
     },
     {
-      "bytes": 2380,
+      "bytes": 2883,
       "classification": "source_or_external_report",
       "path": "SECURITY.md",
-      "sha256": "9d593b938edd11a4ca4f4f0f0f81b1edcb4a77633bbfab320cfbfbe7dbe0c19c"
+      "sha256": "6a67b7844374b67df2e69708440fcd19bf33fee281a56b4cd6479c3a533bebfc"
     },
     {
       "bytes": 3995,
@@ -69,10 +69,10 @@
       "sha256": "6919b815cb131f4965d09e07d508cceabccf01963055c70dd3fe3a1655d1a01f"
     },
     {
-      "bytes": 7291,
+      "bytes": 7980,
       "classification": "source_or_external_report",
       "path": "docs/CONTINUATION_LEDGER.md",
-      "sha256": "35864d05758577f0e50ee8f07b14aed63e35fe70f3772a9fbb804bbc3167e914"
+      "sha256": "ba2e86d1316abf6f2eece43766a3c5028401c3944cc0d6e5b833018d8b35af7b"
     },
     {
       "bytes": 4412,
@@ -687,10 +687,16 @@
       "sha256": "03f32e04936e4ea263f3f04f7473795fb4be91944200e1f03aaf5e4ae44d414e"
     },
     {
-      "bytes": 3507,
+      "bytes": 4022,
       "classification": "source_or_external_report",
       "path": "website/README.md",
-      "sha256": "718001dd6805d6275a592b408db59c1fabc3da776901b960e481bf4930f30b99"
+      "sha256": "dec003d639257e4788242d8e532bde8c3cd09c24d461198c3665f8d91f38f207"
+    },
+    {
+      "bytes": 820,
+      "classification": "source_or_external_report",
+      "path": "website/analytics.js",
+      "sha256": "4347afb270f7e084cd42fa3e2cc8aecc5438ce626eb09db0b71505a8b06c5fa5"
     },
     {
       "bytes": 48366,
@@ -705,10 +711,10 @@
       "sha256": "8d8d0b43f60d1778f8d921f67b71bb36bbef75e7b09246e403a70b3d493d61de"
     },
     {
-      "bytes": 29743,
+      "bytes": 29792,
       "classification": "source_or_external_report",
       "path": "website/index.html",
-      "sha256": "73429997ff7d168bd90299efeaccb1a18758055d925752f174b958d2f7d18915"
+      "sha256": "d3ec3d0cea5e9b0fe4e48347fc83850cfd526b68d50bafd8f098885051310da8"
     },
     {
       "bytes": 12441,

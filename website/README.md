@@ -43,7 +43,7 @@ not accuracy measurements. The lab does not change the fitted model. See
 Connect the repository with Root Directory `website`, Framework Preset **Other**,
 empty build/install commands, and Output Directory `.`. `vercel.json` provides
 static hosting and security headers. No secrets, environment variables, API,
-database, uploads, analytics or external browser assets are needed. Deploy only
+database, uploads or external browser assets required for replay are needed. Deploy only
 this directory; the model and research workspace are not web assets.
 
 ## Verify
@@ -63,3 +63,7 @@ export gate, interval preservation and preview server boundaries.
 ## Matchday interface
 
 Zoom and pan the timeline/minimap, inspect spells, highlight H/A/D/X, compare V1/V2 differences, and inspect uncalibrated observation evidence traces. Fullscreen has a clear browser fallback. Space toggles playback, arrows step frames and Shift+arrows seek team changes; ? opens help. Deep links accept match/half/frame and the previous replay/frame form. The synthetic lab adds a centered emission-radius control without changing the fitted model. Motion/hero playback honor reduced-motion preferences. Squad information is credited to malwarous.dev/team; football roles are metaphors and the open seat is a community invitation.
+
+## Optional deployment analytics
+
+A concurrent team-merged Vercel Analytics PR is preserved through the official plain-HTML script integration. It is isolated from replay startup, disabled on loopback and automated browsers, and removes replay query/hash parameters from page-view URLs. If deployment analytics is disabled, replay still works. No match coordinates, predictions, model inputs or form data are passed to analytics. The site keeps its self-origin CSP; no npm package installation is needed.

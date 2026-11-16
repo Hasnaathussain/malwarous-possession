@@ -42,7 +42,7 @@ README: restrained hero/status badges, linked public replay/evidence/lab screens
 
 Atlas adds a football crest/formation/jersey metaphor; synthetic hero video with pause/reduced-motion handling; scroll reveals/nav; timeline zoom/pan/minimap, spell inspection/state highlights; V1/V2 difference lane and same-geometry state badge; evidence traces/tooltips; fullscreen with explicit browser fallback; keyboard/help; retry/loading/error states; match/half/frame and legacy replay links; four-control synthetic decoder including emission radius. It preserves observed sample positions instead of inventing interpolated coordinates through gaps. Day/night toggle and additional animated explainer are not shipped.
 
-Team roles/links were verified on16November at malwarous.dev/team and homepage. Original SVG jerseys replace borrowed portraits. Public Younas spelling and user registration Younus spelling are explicitly recorded in TEAM_SOURCES.md. The community invitation is not a fourth competition member. No accounts, forms, telemetry, API keys or uploads were added.
+Team roles/links were verified on16November at malwarous.dev/team and homepage. Original SVG jerseys replace borrowed portraits. Public Younas spelling and user registration Younus spelling are explicitly recorded in TEAM_SOURCES.md. The community invitation is not a fourth competition member. No accounts, forms, API keys or uploads were added. Optional deployment analytics from a concurrent team-merged PR is isolated and described below.
 
 ## Submission checklist
 
@@ -62,4 +62,8 @@ Before submitting, use the exact committed submission/Malwarous.csv and submissi
 
 ## Final local verification
 
-209 Python tests and34 subtests pass; six Node decoder/smoothing tests pass. The152-file staged manifest verifies, including all21 frozen source/report/model pins. New staged source scanned with Gitleaks v8.30.1 without custom suppressions: no leaks found. Browser QA passes public replay controls, timeline zoom/pan/state filtering/differences, evidence tooltips, help/fullscreen-or-explicit-fallback, synthetic seek/play sync, share/PNG export, and320/390/768/1366px layouts, with no runtime exceptions or unexpected external application requests. PDF text extraction confirms four unencrypted pages and selectable required claims. All final pages were rendered and visually reviewed.
+209 Python tests and34 subtests pass; six Node decoder/smoothing tests pass. The153-file staged manifest verifies, including all21 frozen source/report/model pins. New staged source scanned with Gitleaks v8.30.1 without custom suppressions: no leaks found. Browser QA passes public replay controls, timeline zoom/pan/state filtering/differences, evidence tooltips, help/fullscreen-or-explicit-fallback, synthetic seek/play sync, share/PNG export, and320/390/768/1366px layouts, with no runtime exceptions or unexpected external application requests. PDF text extraction confirms four unencrypted pages and selectable required claims. All final pages were rendered and visually reviewed.
+
+## Concurrent Analytics repair
+
+Remote main acquired Vercel PR1 during this work. Its bare @vercel/analytics import cannot resolve in a buildless browser module and prevented the deployed replay from starting. The merge retains the intended optional Web Analytics using the official plain-HTML endpoint in a separate script; removes the unused npm dependency/lock; and keeps replay startup independent. No source/model lock was changed. Local/automated browsers do not send analytics; deep-link parameters are redacted. This explains the reported stuck loading without attributing it to model behavior.
